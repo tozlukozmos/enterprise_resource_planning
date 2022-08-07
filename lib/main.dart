@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'app_theme_data.dart';
 import 'routes/routes.dart';
-import 'views/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,9 +18,11 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: "Solvio ERP",
       debugShowCheckedModeBanner: false,
       theme: AppThemeData.lightTheme(context),
-      home: const Login(),
+      darkTheme: AppThemeData.darkTheme(context),
+      initialRoute: "login_view",
       routes: routes,
     );
   }
