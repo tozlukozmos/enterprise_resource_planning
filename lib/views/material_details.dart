@@ -5,6 +5,12 @@ class MaterialDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Material Details Page");
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Material Details Page"),
+        ),
+      ),
+    );
   }
 }

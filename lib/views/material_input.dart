@@ -5,6 +5,12 @@ class MaterialInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Material Input Page");
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Material Input Page"),
+        ),
+      ),
+    );
   }
 }

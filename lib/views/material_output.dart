@@ -5,6 +5,12 @@ class MaterialOutput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text("Material Output Page");
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Material Output Page"),
+        ),
+      ),
+    );
   }
 }
