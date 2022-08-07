@@ -29,12 +29,6 @@ class AppThemeData {
         fontWeight: FontWeight.w600,
         letterSpacing: 0.4,
       ),
-      bodyText2: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w400,
-        letterSpacing: 0.4,
-        color: AppColors.lightPrimary,
-      ),
     ),
 
     appBarTheme: const AppBarTheme(

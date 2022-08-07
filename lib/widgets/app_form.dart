@@ -1,6 +1,8 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
+import '../design/app_text.dart';
+
 class AppForm {
   static Widget appTextFormField({
     required String label,
@@ -13,7 +15,7 @@ class AppForm {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label),
+        Text(label, style: AppText.label),
         const SizedBox(height: 4),
         TextFormField(
           controller: controller,
@@ -40,7 +42,7 @@ class AppForm {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label),
+        Text(label, style: AppText.label),
         const SizedBox(height: 4),
         TextFormField(
           controller: controller,
