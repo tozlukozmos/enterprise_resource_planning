@@ -79,6 +79,9 @@ flutter:
    - family: SourceSansPro
      fonts:
        - asset: assets/fonts/SourceSansPro-Regular.ttf
+
+   - family: SourceSansProBold
+     fonts:
        - asset: assets/fonts/SourceSansPro-SemiBold.ttf
 #   - family: Trajan Pro
 #     fonts:
