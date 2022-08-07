@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class AppText {
 
-  Widget header({
+  static Widget header({
     required String data,
     required Color color,
   }) {
@@ -13,7 +13,7 @@ class AppText {
     );
   }
 
-  Widget label({
+  static Widget label({
     required String data,
     required Color color,
   }) {
@@ -24,7 +24,7 @@ class AppText {
     );
   }
 
-  Widget labelBold({
+  static Widget labelBold({
     required String data,
     required Color color,
   }) {
@@ -35,7 +35,7 @@ class AppText {
     );
   }
 
-  Widget context({
+  static Widget context({
     required String data,
     required Color color,
   }) {
@@ -46,7 +46,7 @@ class AppText {
     );
   }
 
-  Widget contextBold({
+  static Widget contextBold({
     required String data,
     required Color color,
   }) {
@@ -57,7 +57,7 @@ class AppText {
     );
   }
 
-  Widget contextSmall({
+  static Widget contextSmall({
     required String data,
     required Color color,
   }) {

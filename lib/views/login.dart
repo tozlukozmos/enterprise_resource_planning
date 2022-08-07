@@ -1,3 +1,5 @@
+import 'package:enterprise_resource_planning/app_colors.dart';
+import 'package:enterprise_resource_planning/app_text.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_form.dart';
@@ -18,6 +20,12 @@ class Login extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                AppText.context(data: 'data', color: AppColors.lightPrimary),
+                AppText.contextBold(data: 'data', color: AppColors.lightPrimary),
+                AppText.contextSmall(data: 'data', color: AppColors.lightPrimary),
+                AppText.header(data: 'data', color: AppColors.lightPrimary),
+                AppText.label(data: 'data', color: AppColors.lightPrimary),
+                AppText.labelBold(data: 'data', color: AppColors.lightPrimary),
                 const Text("Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır."),
                 const SizedBox(height: 16),
                 ElevatedButton(
