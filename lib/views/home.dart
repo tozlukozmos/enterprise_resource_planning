@@ -86,11 +86,17 @@ class _HomeState extends State<Home> {
                   crossAxisCount: 3,
                   children: [
                     AppCards.processCard(
-                        icon: Icons.add, text: "Hammadde Giriş", onTap: () {}),
+                        icon: Icons.add, text: "Hammadde Giriş", onTap: () {
+                      Navigator.of(context).pushNamed("material_input_view");
+                    }),
                     AppCards.processCard(
-                        icon: Icons.add, text: "Hammadde Çıkış", onTap: () {}),
+                        icon: Icons.add, text: "Hammadde Çıkış", onTap: () {
+                      Navigator.of(context).pushNamed("material_output_view");
+                    }),
                     AppCards.processCard(
-                        icon: Icons.add, text: "Detayları Gör", onTap: () {}),
+                        icon: Icons.add, text: "Detayları Gör", onTap: () {
+                      Navigator.of(context).pushNamed("material_details_view");
+                    }),
                     AppCards.processCard(
                         icon: Icons.add,
                         text: "Bitmiş Ürün Giriş",
@@ -102,7 +108,9 @@ class _HomeState extends State<Home> {
                     AppCards.processCard(
                         icon: Icons.add,
                         text: "Hatalı Hammadde Bildirimi",
-                        onTap: () {})
+                        onTap: () {
+                          Navigator.of(context).pushNamed("material_reporting_view");
+                        })
                   ]),
               const SizedBox(
                 height: 40,

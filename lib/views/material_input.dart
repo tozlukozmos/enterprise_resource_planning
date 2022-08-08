@@ -18,6 +18,11 @@ class MaterialInput extends StatelessWidget {
   final TextEditingController _explanationController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    _typeController = '';
+     _unitController = '';
+     _sizeController = '';
+    _colorController = '';
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -135,7 +140,7 @@ class MaterialInput extends StatelessWidget {
                 const SizedBox(height: 24),
                 AppForm.appTextFormField(
                   label: "Açıklama",
-                  hint: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. ",
+                  hint: "Ekstra bilgileri buraya ekleyebilirsiniz. ",
                   controller: _explanationController,
                   context: context,
                 ),

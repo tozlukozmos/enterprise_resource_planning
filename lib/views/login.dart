@@ -33,7 +33,9 @@ class Login extends StatelessWidget {
                 Text("Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır.", style: AppText.context),
                 const SizedBox(height: 16),
                 ElevatedButton(
-                  onPressed: (){},
+                  onPressed: (){
+                    Navigator.of(context).pushNamed("home_view");
+                  },
                   child: const Text("Button Name"),
                 ),
                 const SizedBox(height: 16),
@@ -67,7 +69,7 @@ class Login extends StatelessWidget {
                 const SizedBox(height: 16),
                 AppForm.appSearchableDropDownField(
                   items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
-                  label: "",
+                  label: "Başlık",
                   onChanged: (value){},
                   selectedItem: "",
                   context: context,
