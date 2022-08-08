@@ -22,7 +22,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       theme: AppThemeData.lightTheme(context),
       darkTheme: AppThemeData.darkTheme(context),
-      initialRoute: "home_view",
+      initialRoute: "login_view",
       routes: routes,
     );
   }
