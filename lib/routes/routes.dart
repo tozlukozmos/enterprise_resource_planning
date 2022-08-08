@@ -10,8 +10,8 @@ import '../views/material_reporting.dart';
 Map<String, Widget Function(BuildContext)> routes = {
   "login_view": (context) => const Login(),
   "home_view": (context) => const Home(),
-  "material_input_view": (context) => const MaterialInput(),
-  "material_output_view": (context) => const MaterialOutput(),
-  "material_reporting_view": (context) => const MaterialReporting(),
-  "material_details_view": (context) => const MaterialDetails(),
+  "material_input_view": (context) => MaterialInput(),
+  "material_output_view": (context) => MaterialOutput(),
+  "material_reporting_view": (context) => MaterialReporting(),
+  "material_details_view": (context) => MaterialDetails(),
 };

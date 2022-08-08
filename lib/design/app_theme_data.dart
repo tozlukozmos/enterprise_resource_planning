@@ -62,6 +62,13 @@ class AppThemeData {
     ),
 
     inputDecorationTheme: InputDecorationTheme(
+      disabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(
+          width: 1,
+          color: AppColors.lightPrimary,
+        ),
+        borderRadius: BorderRadius.circular(4),
+      ),
       enabledBorder: OutlineInputBorder(
         borderSide: const BorderSide(
           width: 1,

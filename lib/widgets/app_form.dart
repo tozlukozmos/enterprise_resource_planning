@@ -11,13 +11,15 @@ class AppForm {
     required BuildContext context,
     bool isPassword = false,
     bool isEmail = false,
+    bool enabled = true,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppText.label),
+        Text(label, style: AppText.labelSemiBold),
         const SizedBox(height: 4),
         TextFormField(
+          enabled: enabled,
           controller: controller,
           keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
           obscureText: isPassword,
@@ -38,13 +40,15 @@ class AppForm {
     bool isPassword = false,
     bool isEmail = false,
     bool isPrefixIcon = true,
+    bool enabled = true,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppText.label),
+        Text(label, style: AppText.labelSemiBold),
         const SizedBox(height: 4),
         TextFormField(
+          enabled: enabled,
           controller: controller,
           keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
           obscureText: isPassword,
@@ -64,18 +68,26 @@ class AppForm {
     required Function(String?) onChanged,
     required selectedItem,
     required BuildContext context,
+    bool enabled = true,
   }) {
-    return DropdownSearch<String>(
-      popupProps: PopupProps.menu(
-        menuProps:
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: AppText.labelSemiBold,),
+        DropdownSearch<String>(
+          enabled: enabled,
+          popupProps: PopupProps.menu(
+            menuProps:
             const MenuProps(backgroundColor: Color.fromRGBO(242, 242, 242, 1)),
-        showSelectedItems: true,
-        showSearchBox: true,
-        disabledItemFn: (String s) => s.startsWith('I'),
-      ),
-      items: items,
-      onChanged: onChanged,
-      selectedItem: selectedItem,
+            showSelectedItems: true,
+            showSearchBox: true,
+            disabledItemFn: (String s) => s.startsWith('I'),
+          ),
+          items: items,
+          onChanged: onChanged,
+          selectedItem: selectedItem,
+        )
+      ],
     );
   }
 }
