@@ -1,125 +1,98 @@
 import 'package:flutter/material.dart';
-import '../design/app_text.dart';
 
+import '../design/app_text.dart';
 import '../widgets/app_form.dart';
 
-class Login extends StatelessWidget {
+class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
+
+  @override
+  State<Login> createState() => _LoginState();
+}
+
+class _LoginState extends State<Login> {
+  bool isChecked = false;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Login Page"),
+      child: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage("https://firebasestorage.googleapis.com/v0/b/my-first-project-5d32d.appspot.com/o/1659973205794?alt=media&token=87b033f3-1cab-4a1a-91a3-2a1d5e92b3cd"),
+            fit: BoxFit.fitWidth,
+            alignment: Alignment.bottomCenter
+          ),
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(24),
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Header", style: AppText.headerSemiBold),
-                Text("Header", style: AppText.header),
-                Text("Title", style: AppText.titleSemiBold),
-                Text("Title", style: AppText.title),
-                Text("Context", style: AppText.contextSemiBold),
-                Text("Context", style: AppText.context),
-                Text("Label", style: AppText.labelSemiBold),
-                Text("Label", style: AppText.label),
-                Text("Helper", style: AppText.helperSemiBold),
-                Text("Helper", style: AppText.helper),
-                const SizedBox(height: 16),
-                Text("Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır.", style: AppText.context),
-                const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: (){
-                    Navigator.of(context).pushNamed("home_view");
-                  },
-                  child: const Text("Button Name"),
-                ),
-                const SizedBox(height: 16),
-                OutlinedButton(
-                  onPressed: (){},
-                  child: const Text("Button Name"),
-                ),
-                const SizedBox(height: 16),
-                TextButton(
-                  onPressed: (){},
-                  child: const Text("Button Name"),
-                ),
-                const SizedBox(height: 16),
-                ElevatedButton.icon(
-                  onPressed: (){},
-                  icon: const Icon(Icons.add),
-                  label: const Text("Button Name"),
-                ),
-                const SizedBox(height: 16),
-                OutlinedButton.icon(
-                  onPressed: (){},
-                  icon: const Icon(Icons.add),
-                  label: const Text("Button Name"),
-                ),
-                const SizedBox(height: 16),
-                TextButton.icon(
-                  onPressed: (){},
-                  icon: const Icon(Icons.add),
-                  label: const Text("Button Name"),
-                ),
-                const SizedBox(height: 16),
-                AppForm.appSearchableDropDownField(
-                  items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
-                  label: "Başlık",
-                  onChanged: (value){},
-                  selectedItem: "",
-                  context: context,
-                ),
-                const SizedBox(height: 16),
-                AppForm.appTextFormFieldIcon(
-                  label: "Şifre",
-                  hint: "Şifreniz 6 ila 18 karakter arası olmalı",
-                  icon: const Icon(Icons.remove_red_eye_outlined),
-                  controller: TextEditingController(),
-                  context: context,
-                  isPrefixIcon: false,
-                ),
-                const SizedBox(height: 16),
-                AppForm.appTextFormFieldIcon(
-                  label: "Email",
-                  hint: "ör. isminiz@domain.com",
-                  icon: const Icon(Icons.email_outlined),
-                  controller: TextEditingController(),
-                  context: context,
-                ),
-                const SizedBox(height: 16),
-                AppForm.appTextFormField(
-                  label: "Şifre",
-                  hint: "Şifreniz 6 ila 18 karakter arası olmalı",
-                  controller: TextEditingController(),
-                  context: context,
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: ListView(
+            padding: const EdgeInsets.all(24),
+            children: [
+              Align(
+                alignment: Alignment.topLeft,
+                child: Image.network("https://firebasestorage.googleapis.com/v0/b/my-first-project-5d32d.appspot.com/o/1659976414000?alt=media&token=90a91945-3411-432f-8b3e-18afde8e4e85"),
+              ),
+              Image.network("https://firebasestorage.googleapis.com/v0/b/my-first-project-5d32d.appspot.com/o/1659976603647?alt=media&token=c559ba6a-dd19-4f93-914f-fde086d45051"),
+              Form(
+                child: Column(
                   children: [
-                    Checkbox(
-                      value: true,
-                      onChanged: (value){},
+                    Text("Hoş geldiniz", style: AppText.titleSemiBold),
+                    const SizedBox(height: 4),
+                    Text("Giriş yapmak için email & şifrenizi giriniz.", style: AppText.context),
+                    const SizedBox(height: 32),
+                    AppForm.appTextFormField(
+                      label: "Email",
+                      hint: "isminiz@domain.com",
+                      controller: TextEditingController(),
+                      context: context,
                     ),
-                    const SizedBox(width: 16),
-                    Checkbox(
-                      value: false,
-                      onChanged: (value){},
+                    const SizedBox(height: 24),
+                    Stack(
+                      children: [
+                        AppForm.appTextFormFieldIcon(
+                          label: "Şifre",
+                          hint: "Şifreniz 6 ila 18 karakter arası olmalı",
+                          icon: const Icon(Icons.remove_red_eye_outlined),
+                          controller: TextEditingController(),
+                          context: context,
+                          isPrefixIcon: false,
+                        ),
+                        Positioned(
+                          top: 0,
+                          right: 0,
+                          child: Text("Şifremi Unuttum", style: AppText.label),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: isChecked,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              isChecked = value!;
+                            });
+                          },
+                        ),
+                        const SizedBox(width: 8),
+                        Text("Beni Hatırla", style: AppText.label)
+                      ],
+                    ),
+                    const SizedBox(height: 4),
+                    Align(
+                      alignment: Alignment.centerRight,
+                      child: ElevatedButton(
+                        onPressed: () {Navigator.pushReplacementNamed(context, "home_view");},
+                        child: const Text("Giriş Yap"),
+                      ),
                     ),
                   ],
                 ),
-              ],
-            )
-          ],
-        ),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-          onPressed: () {},
+              ),
+            ],
+          ),
         ),
       ),
     );

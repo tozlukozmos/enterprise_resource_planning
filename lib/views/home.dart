@@ -36,7 +36,7 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-        body: ListView(padding: const EdgeInsets.all(30), children: [
+        body: ListView(padding: const EdgeInsets.all(24), children: [
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -69,7 +69,7 @@ class _HomeState extends State<Home> {
               AppCards.taskCard(
                   color: AppColors.lightWarning,
                   header: "header",
-                  task: "task",
+                  task: "tasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktask",
                   date: "22/03/2022",
                   userName: "Burak Ünal"),
               const SizedBox(height: 10),
@@ -86,17 +86,26 @@ class _HomeState extends State<Home> {
                   crossAxisCount: 3,
                   children: [
                     AppCards.processCard(
-                        icon: Icons.add, text: "Hammadde Giriş", onTap: () {
-                      Navigator.of(context).pushNamed("material_input_view");
-                    }),
+                        icon: Icons.add,
+                        text: "Hammadde Giriş",
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed("material_input_view");
+                        }),
                     AppCards.processCard(
-                        icon: Icons.add, text: "Hammadde Çıkış", onTap: () {
-                      Navigator.of(context).pushNamed("material_output_view");
-                    }),
+                        icon: Icons.add,
+                        text: "Hammadde Çıkış",
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed("material_output_view");
+                        }),
                     AppCards.processCard(
-                        icon: Icons.add, text: "Detayları Gör", onTap: () {
-                      Navigator.of(context).pushNamed("material_details_view");
-                    }),
+                        icon: Icons.add,
+                        text: "Detayları Gör",
+                        onTap: () {
+                          Navigator.of(context)
+                              .pushNamed("material_details_view");
+                        }),
                     AppCards.processCard(
                         icon: Icons.add,
                         text: "Bitmiş Ürün Giriş",
@@ -109,7 +118,8 @@ class _HomeState extends State<Home> {
                         icon: Icons.add,
                         text: "Hatalı Hammadde Bildirimi",
                         onTap: () {
-                          Navigator.of(context).pushNamed("material_reporting_view");
+                          Navigator.of(context)
+                              .pushNamed("material_reporting_view");
                         })
                   ]),
               const SizedBox(
