@@ -35,7 +35,7 @@ class AppCards {
                         color: color,
                       ),
                     ),
-                    const SizedBox(width: 10),
+                    const SizedBox(width: 12),
                     Text(
                       header,
                       style: AppText.contextSemiBold,
@@ -53,7 +53,7 @@ class AppCards {
               style: AppText.context,
             ),
             const SizedBox(
-              height: 50,
+              height: 70,
             ),
             Row(
               children: [
@@ -84,7 +84,7 @@ class AppCards {
                     ],
                   ),
                 ),
-                const SizedBox(width: 20),
+                const SizedBox(width: 16),
                 Container(
                   height: 30,
                   width: 100,
