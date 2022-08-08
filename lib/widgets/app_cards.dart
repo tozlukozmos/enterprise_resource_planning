@@ -149,7 +149,7 @@ class AppCards {
                           color: AppColors.lightPrimary,
                           fontFamily: 'SourceSansPro',
                           fontWeight: FontWeight.w600,
-                          fontSize: 11),
+                          fontSize: 12),
                       textAlign: TextAlign.center,
                     ),
                   ),
