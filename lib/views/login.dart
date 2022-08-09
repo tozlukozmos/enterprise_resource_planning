@@ -1,3 +1,4 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -51,7 +52,7 @@ class _LoginState extends State<Login> {
                         label: "Email",
                         hint: "isminiz@domain.com",
                         controller: TextEditingController(),
-                        context: context,
+                        isEmail: true,
                       ),
                       const SizedBox(height: 24),
                       Stack(
@@ -59,10 +60,10 @@ class _LoginState extends State<Login> {
                           AppForm.appTextFormFieldIcon(
                             label: "Şifre",
                             hint: "Şifreniz 6 ila 18 karakter arası olmalı",
-                            icon: const Icon(Icons.remove_red_eye_outlined),
+                            icon: const Icon(FluentIcons.eye_off_24_regular),
                             controller: TextEditingController(),
-                            context: context,
                             isPrefixIcon: false,
+                            isPassword: true,
                           ),
                           Positioned(
                             top: 0,

@@ -2,7 +2,9 @@ import 'package:enterprise_resource_planning/design/app_colors.dart';
 import 'package:enterprise_resource_planning/design/app_text.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
 import 'package:enterprise_resource_planning/widgets/app_form.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -25,7 +27,7 @@ class _HomeState extends State<Home> {
           ),
           leadingWidth: 160,
           actions: [
-            const Icon(Icons.notifications_none),
+            const Icon(Iconsax.notification),
             const SizedBox(width: 12),
             Stack(
               alignment: Alignment.center,
@@ -43,7 +45,7 @@ class _HomeState extends State<Home> {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.person,
+                            FluentIcons.person_28_regular,
                             color: AppColors.lightPrimary,
                           ),
                           const SizedBox(width: 10),
@@ -57,7 +59,7 @@ class _HomeState extends State<Home> {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.settings,
+                            FluentIcons.settings_24_regular,
                             color: AppColors.lightPrimary,
                           ),
                           const SizedBox(width: 10),
@@ -71,7 +73,7 @@ class _HomeState extends State<Home> {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.help_outline_sharp,
+                            FluentIcons.chat_help_24_regular,
                             color: AppColors.lightPrimary,
                           ),
                           const SizedBox(width: 10),
@@ -85,7 +87,7 @@ class _HomeState extends State<Home> {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.exit_to_app_outlined,
+                            FluentIcons.arrow_exit_20_regular,
                             color: AppColors.lightPrimary,
                           ),
                           const SizedBox(width: 10),
@@ -147,36 +149,36 @@ class _HomeState extends State<Home> {
               crossAxisCount: 3,
               children: [
                 AppCards.processCard(
-                    icon: Icons.add,
+                    icon: FluentIcons.add_square_24_regular,
                     text: "Hammadde Giriş",
                     onTap: () {
                       Navigator.of(context)
                           .pushNamed("material_input_view");
                     }),
                 AppCards.processCard(
-                    icon: Icons.add,
+                    icon: FluentIcons.subtract_square_24_regular,
                     text: "Hammadde Çıkış",
                     onTap: () {
                       Navigator.of(context)
                           .pushNamed("material_output_view");
                     }),
                 AppCards.processCard(
-                    icon: Icons.add,
+                    icon: FluentIcons.slide_text_24_regular,
                     text: "Detayları Gör",
                     onTap: () {
                       Navigator.of(context)
                           .pushNamed("material_details_view");
                     }),
                 AppCards.processCard(
-                    icon: Icons.add,
+                    icon: FluentIcons.slide_add_24_regular,
                     text: "Bitmiş Ürün Giriş",
                     onTap: () {}),
                 AppCards.processCard(
-                    icon: Icons.add,
+                    icon: FluentIcons.vehicle_truck_bag_20_regular,
                     text: "Bitmiş Ürün Çıkış",
                     onTap: () {}),
                 AppCards.processCard(
-                    icon: Icons.add,
+                    icon: FluentIcons.clipboard_error_24_regular,
                     text: "Hammadde Hata Bildir",
                     onTap: () {
                       Navigator.of(context)

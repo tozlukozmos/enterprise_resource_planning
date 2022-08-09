@@ -1,5 +1,6 @@
 import 'package:enterprise_resource_planning/design/app_colors.dart';
 import 'package:enterprise_resource_planning/design/app_text.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
 class AppCards {
@@ -37,7 +38,7 @@ class AppCards {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.published_with_changes_rounded,
+                            FluentIcons.arrow_sync_24_regular,
                             color: AppColors.lightPrimary,
                           ),
                           const SizedBox(width: 10),
@@ -51,7 +52,7 @@ class AppCards {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.alarm_add_rounded,
+                            FluentIcons.clock_alarm_24_regular,
                             color: AppColors.lightPrimary,
                           ),
                           const SizedBox(width: 10),
@@ -65,7 +66,7 @@ class AppCards {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.error_outline_rounded,
+                            FluentIcons.error_circle_20_regular,
                             color: AppColors.lightPrimary,
                           ),
                           const SizedBox(width: 10),
@@ -77,7 +78,7 @@ class AppCards {
                   shape: Border.all(color: AppColors.lightPrimary),
                   splashRadius: 20,
                   icon: const Icon(
-                    Icons.more_vert_rounded,
+                    FluentIcons.more_vertical_24_regular,
                     color: AppColors.lightBlack,
                   ),
                   offset: const Offset(0, 44),
@@ -103,7 +104,7 @@ class AppCards {
                   child: Row(
                     children: [
                       const Icon(
-                        Icons.date_range_rounded,
+                        FluentIcons.calendar_ltr_24_regular,
                         color: AppColors.lightBlack,
                         size: 20,
                       ),
@@ -130,7 +131,7 @@ class AppCards {
                   child: Row(
                     children: [
                       const Icon(
-                        Icons.person_outline_rounded,
+                        FluentIcons.person_24_regular,
                         color: AppColors.lightBlack,
                         size: 20,
                       ),
