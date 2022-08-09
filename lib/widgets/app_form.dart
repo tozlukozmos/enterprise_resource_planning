@@ -10,9 +10,9 @@ class AppForm {
     required String label,
     required String hint,
     required TextEditingController controller,
-    required BuildContext context,
     bool isPassword = false,
     bool isEmail = false,
+    bool isRequired = false,
     bool isEnabled = true,
     bool isExpands = false,
     int maxLines = 1,
@@ -20,7 +20,16 @@ class AppForm {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppText.labelSemiBold),
+        Row(
+          children: [
+            Text(label, style: AppText.labelSemiBold),
+            isRequired ? const Text("*", style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightError,
+            )) : const Text(""),
+          ],
+        ),
         const SizedBox(height: 4),
         TextFormField(
           expands: isExpands,
@@ -37,95 +46,30 @@ class AppForm {
     );
   }
 
-  static Widget appAutoCompleteTextFormField({
-    required String label,
-    required String hint,
-    required TextEditingController controller,
-    required GlobalKey<AutoCompleteTextFieldState<String>> key,
-    required List<String> suggestions,
-    bool isEnabled = true,
-  }) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(label, style: AppText.labelSemiBold),
-        const SizedBox(height: 4),
-        SimpleAutoCompleteTextField(
-          key: key,
-          controller: controller,
-          decoration: InputDecoration(
-            disabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                width: 1,
-                color: AppColors.lightPrimary,
-              ),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                width: 1,
-                color: AppColors.lightPrimary,
-              ),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                width: 1,
-                color: AppColors.lightInfo,
-              ),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                width: 1,
-                color: AppColors.lightError,
-              ),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderSide: const BorderSide(
-                width: 1,
-                color: AppColors.lightError,
-              ),
-              borderRadius: BorderRadius.circular(4),
-            ),
-            errorStyle: const TextStyle(
-              fontWeight: FontWeight.w400,
-              fontSize: 12,
-              color: AppColors.lightError,
-            ),
-            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-            hintStyle: TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w400,
-              color: AppColors.lightPrimary.withOpacity(0.4),
-            ),
-            iconColor: AppColors.lightPrimary,
-            hintText: hint,
-          ),
-          suggestions: suggestions,
-          textSubmitted: (String value) {},
-          clearOnSubmit: false,
-        ),
-      ],
-    );
-  }
-
   static Widget appTextFormFieldIcon({
     required String label,
     required String hint,
     required Icon icon,
     required TextEditingController controller,
-    required BuildContext context,
     bool isPassword = false,
     bool isEmail = false,
+    bool isRequired = false,
     bool isPrefixIcon = true,
     bool isEnabled = true,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppText.labelSemiBold),
+        Row(
+          children: [
+            Text(label, style: AppText.labelSemiBold),
+            isRequired ? const Text("*", style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightError,
+            )) : const Text(""),
+          ],
+        ),
         const SizedBox(height: 4),
         TextFormField(
           enabled: isEnabled,
@@ -142,18 +86,64 @@ class AppForm {
     );
   }
 
-  static Widget appSearchableDropDownField({
-    required List<String> items,
+  static Widget appAutoCompleteTextFormField({
     required String label,
-    required Function(String?) onChanged,
-    required selectedItem,
-    required BuildContext context,
+    required String hint,
+    required TextEditingController controller,
+    required GlobalKey<AutoCompleteTextFieldState<String>> key,
+    required List<String> suggestions,
+    bool isRequired = false,
     bool isEnabled = true,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppText.labelSemiBold,),
+        Row(
+          children: [
+            Text(label, style: AppText.labelSemiBold),
+            isRequired ? const Text("*", style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightError,
+            )) : const Text(""),
+          ],
+        ),
+        const SizedBox(height: 4),
+        SimpleAutoCompleteTextField(
+          key: key,
+          controller: controller,
+          decoration: InputDecoration(
+            hintText: hint,
+          ),
+          suggestions: suggestions,
+          textSubmitted: (String value) {},
+          clearOnSubmit: false,
+        ),
+      ],
+    );
+  }
+
+  static Widget appSearchableDropDownField({
+    required List<String> items,
+    required String label,
+    required Function(String?) onChanged,
+    required selectedItem,
+    bool isRequired = false,
+    bool isEnabled = true,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(label, style: AppText.labelSemiBold),
+            isRequired ? const Text("*", style: TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+              color: AppColors.lightError,
+            )) : const Text(""),
+          ],
+        ),
         DropdownSearch<String>(
           enabled: isEnabled,
           popupProps: PopupProps.menu(

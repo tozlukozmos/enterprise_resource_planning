@@ -1,28 +1,22 @@
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:enterprise_resource_planning/design/app_colors.dart';
 import 'package:enterprise_resource_planning/design/app_text.dart';
 import '../widgets/app_form.dart';
 
-
-
-
 class MaterialInput extends StatelessWidget {
   MaterialInput({Key? key}) : super(key: key);
 
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _typeController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
-  late String _typeController;
-  late String _unitController;
-  late String _sizeController;
-  late String _colorController;
+  final TextEditingController _unitController = TextEditingController();
+  final TextEditingController _sizeController = TextEditingController();
+  final TextEditingController _colorController = TextEditingController();
   final TextEditingController _explanationController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    _typeController = '';
-    _unitController = '';
-    _sizeController = '';
-    _colorController = '';
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -31,135 +25,127 @@ class MaterialInput extends StatelessWidget {
         body: ListView(
           padding: const EdgeInsets.all(24),
           children: [
-            Column(
+            Row(
               children: [
-                Row(
-                  children: [
-                    Expanded(
-                        flex: 1,
-                        child: Column(
-                          children: [
-                            AppForm.appTextFormField(
-                              label: "İsim",
-                              hint: "örn. Gizli Ayak",
-                              controller: _nameController,
-                              context: context,
-                            ),
-                            const SizedBox(height: 24),
-                            AppForm.appSearchableDropDownField(
-                              items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
-                              label: "Cins",
-                              onChanged: (value){},
-                              selectedItem: _typeController,
-                              context: context,
-                            ),
-                          ],
-                        )),
-                    const SizedBox(width: 24),
-                    Expanded(
-                      flex: 1,
-                      child: InkWell(
-                        onTap: (){
-                          debugPrint('Görsel Ekle');
-                        },
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      AppForm.appAutoCompleteTextFormField(
+                        label: "İsim",
+                        hint: "ör. Gizli Ayak",
+                        controller: _nameController,
+                        key: GlobalKey(),
+                        suggestions: ["Çivi", "Sunta", "Sünger", "Vida", "Gizli Ayak"],
+                        isRequired: true,
+                      ),
+                      const SizedBox(height: 24),
+                      AppForm.appAutoCompleteTextFormField(
+                        label: "Cins",
+                        hint: "ör. Uzun",
+                        controller: _typeController,
+                        key: GlobalKey(),
+                        suggestions: ["Uzun", "Kısa", "Orta", "Gözenekli"],
+                      ),
+                      const SizedBox(height: 24),
+                      AppForm.appAutoCompleteTextFormField(
+                        label: "Miktar",
+                        hint: "ör. 380",
+                        controller: _amountController,
+                        key: GlobalKey(),
+                        suggestions: ["200", "24", "380", "120"],
+                        isRequired: true,
+                      ),
+                      const SizedBox(height: 24),
+                      AppForm.appAutoCompleteTextFormField(
+                        label: "Boyut",
+                        hint: "ör. 12 cm",
+                        controller: _sizeController,
+                        key: GlobalKey(),
+                        suggestions: ["14 cm", "16 cm", "20 cm", "5 m"],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 24),
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 8),
+                      InkWell(
+                        onTap: () {},
                         child: Container(
-                            width: 171,
-                            height: 156,
-                            decoration: BoxDecoration(
-                                color: AppColors.lightPrimary.withOpacity(0.04),
-                                border: Border.all(
-                                    color: AppColors.lightPrimary,
-                                    style: BorderStyle.solid
-                                ),
-                              borderRadius: BorderRadius.circular(4),
+                          width: 171,
+                          height: 156,
+                          decoration: BoxDecoration(
+                            color: AppColors.lightPrimary.withOpacity(0.04),
+                            border: Border.all(
+                              color: AppColors.lightPrimary,
+                              style: BorderStyle.solid,
                             ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                const Icon(Icons.image, size: 53, color: AppColors.lightPrimary,),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Icon(Icons.add,size: 36, color: AppColors.lightPrimary,),
-                                    Text('Görsel Ekle', style: AppText.contextSemiBold,),
-                                  ],
-                                )
-                              ],
-                            )
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              const Icon(
+                                FluentIcons.image_24_regular,
+                                size: 53,
+                                color: AppColors.lightPrimary,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Icon(
+                                    FluentIcons.add_24_regular,
+                                    size: 28,
+                                    color: AppColors.lightPrimary,
+                                  ),
+                                  Text('Görsel Ekle', style: AppText.contextSemiBold),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: AppForm.appTextFormField(
-                        label: "Miktar",
-                        hint: "örn. 380",
-                        controller: _amountController,
-                        context: context,
-                      ),),
-                    const SizedBox(width: 24),
-                    Expanded(
-                      flex: 1,
-                      child: AppForm.appSearchableDropDownField(
-                        items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
-                        label: 'Miktar Birimi',
-                        onChanged: (value){},
-                        selectedItem: _unitController,
-                        context: context,
-                      ),),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: AppForm.appSearchableDropDownField(
-                        items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
-                        label: "Boyut",
-                        onChanged: (value){},
-                        selectedItem: _sizeController,
-                        context: context,
-                      ),),
-                    const SizedBox(width: 24),
-                    Expanded(
-                      flex: 1,
-                      child: AppForm.appSearchableDropDownField(
-                        items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
+                      const SizedBox(height: 24),
+                      AppForm.appAutoCompleteTextFormField(
+                        label: "Miktar Birimi",
+                        hint: "ör. Adet",
+                        controller: _unitController,
+                        key: GlobalKey(),
+                        suggestions: ["Paket", "Adet", "Metre", "Kg"],
+                        isRequired: true,
+                      ),
+                      const SizedBox(height: 24),
+                      AppForm.appAutoCompleteTextFormField(
                         label: "Renk",
-                        onChanged: (value){},
-                        selectedItem: _colorController,
-                        context: context,
-                      ),),
-                  ],
-                ),
-                const SizedBox(height: 24),
-                AppForm.appTextFormField(
-                  maxLines: 3,
-                  label: "Açıklama",
-                  hint: "Ekstra bilgileri buraya ekleyebilirsiniz. ",
-                  controller: _explanationController,
-                  context: context,
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ElevatedButton(
-                      onPressed: (){
-                        debugPrint('Hammadde Eklendi');
-                      },
-                      child: const Text("Giriş İşlemini Tamamla"),
-                    ),
-                  ],
+                        hint: "ör. Ceviz",
+                        controller: _colorController,
+                        key: GlobalKey(),
+                        suggestions: ["Kırmızı", "Yeşil", "Mor", "Mavi"],
+                      ),
+                    ],
+                  ),
                 ),
               ],
-            )
+            ),
+            const SizedBox(height: 24),
+            AppForm.appTextFormField(
+              maxLines: 3,
+              label: "Açıklama",
+              hint: "Ekstra bilgileri buraya ekleyebilirsiniz. ",
+              controller: _explanationController,
+            ),
+            const SizedBox(height: 24),
+            Align(
+              alignment: Alignment.centerRight,
+              child: ElevatedButton(
+                onPressed: () {},
+                child: const Text("Giriş İşlemini Tamamla"),
+              ),
+            ),
           ],
         ),
       ),
