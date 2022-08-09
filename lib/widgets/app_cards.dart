@@ -39,7 +39,57 @@ class AppCards {
                     )
                   ],
                 ),
-                IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+                PopupMenuButton<int>(
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      onTap: () {},
+                      value: 1,
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.update_outlined,
+                            color: AppColors.lightPrimary,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "İşleme Al",
+                            style: AppText.contextSemiBold,
+                          )
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {},
+                      value: 2,
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.add_alert_outlined,
+                            color: AppColors.lightPrimary,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Alarm Ekle",
+                            style: AppText.contextSemiBold,
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                  shape: Border.all(color: AppColors.lightPrimary),
+                  splashRadius: 20,
+                  icon: const Icon(
+                    Icons.more_vert,
+                    color: AppColors.lightPrimary,
+                  ),
+                  offset: const Offset(0, 36),
+                  color: AppColors.lightSecondary,
+                  elevation: 0,
+                ),
               ],
             ),
             const SizedBox(
