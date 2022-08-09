@@ -1,6 +1,7 @@
 import 'package:enterprise_resource_planning/design/app_colors.dart';
 import 'package:enterprise_resource_planning/design/app_text.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
+import 'package:enterprise_resource_planning/widgets/app_form.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -176,7 +177,7 @@ class _HomeState extends State<Home> {
                     onTap: () {}),
                 AppCards.processCard(
                     icon: Icons.add,
-                    text: "Hatalı Hammadde Bildirimi",
+                    text: "Hammadde Hata Bildir",
                     onTap: () {
                       Navigator.of(context)
                           .pushNamed("material_reporting_view");

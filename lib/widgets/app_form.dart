@@ -1,6 +1,8 @@
+import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 
+import '../design/app_colors.dart';
 import '../design/app_text.dart';
 
 class AppForm {
@@ -30,6 +32,80 @@ class AppForm {
           decoration: InputDecoration(
             hintText: hint,
           ),
+        ),
+      ],
+    );
+  }
+
+  static Widget appAutoCompleteTextFormField({
+    required String label,
+    required String hint,
+    required TextEditingController controller,
+    required GlobalKey<AutoCompleteTextFieldState<String>> key,
+    required List<String> suggestions,
+    bool isEnabled = true,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label, style: AppText.labelSemiBold),
+        const SizedBox(height: 4),
+        SimpleAutoCompleteTextField(
+          key: key,
+          controller: controller,
+          decoration: InputDecoration(
+            disabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                width: 1,
+                color: AppColors.lightPrimary,
+              ),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                width: 1,
+                color: AppColors.lightPrimary,
+              ),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                width: 1,
+                color: AppColors.lightInfo,
+              ),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            errorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                width: 1,
+                color: AppColors.lightError,
+              ),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            focusedErrorBorder: OutlineInputBorder(
+              borderSide: const BorderSide(
+                width: 1,
+                color: AppColors.lightError,
+              ),
+              borderRadius: BorderRadius.circular(4),
+            ),
+            errorStyle: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+              color: AppColors.lightError,
+            ),
+            contentPadding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            hintStyle: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w400,
+              color: AppColors.lightPrimary.withOpacity(0.4),
+            ),
+            iconColor: AppColors.lightPrimary,
+            hintText: hint,
+          ),
+          suggestions: suggestions,
+          textSubmitted: (String value) {},
+          clearOnSubmit: false,
         ),
       ],
     );
