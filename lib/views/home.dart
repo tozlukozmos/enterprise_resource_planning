@@ -23,15 +23,117 @@ class _HomeState extends State<Home> {
                 image: DecorationImage(
                     image: AssetImage("assets/images/Group 59.png"))),
           ),
-          actions: const [
-            Icon(Icons.notifications_none),
-            SizedBox(
+          actions: [
+            const Icon(Icons.notifications_none),
+            const SizedBox(
               width: 20,
             ),
-            CircleAvatar(
-              radius: 14,
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0, bottom: 12.0),
+              child: Stack(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(left: 8.0),
+                    height: 32,
+                    width: 32,
+                    decoration: BoxDecoration(
+                        image: const DecorationImage(image: AssetImage("soon")),
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(100)),
+                  ),
+                  PopupMenuButton<int>(
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        onTap: () {},
+                        value: 1,
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.person,
+                              color: AppColors.lightPrimary,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Profil",
+                              style: AppText.contextSemiBold,
+                            )
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        onTap: () {},
+                        value: 2,
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.settings,
+                              color: AppColors.lightPrimary,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Ayarlar",
+                              style: AppText.contextSemiBold,
+                            )
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        onTap: () {},
+                        value: 3,
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.help_outline_sharp,
+                              color: AppColors.lightPrimary,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Yardım",
+                              style: AppText.contextSemiBold,
+                            )
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        onTap: () {},
+                        value: 4,
+                        child: Row(
+                          children: [
+                            const Icon(
+                              Icons.exit_to_app_outlined,
+                              color: AppColors.lightPrimary,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Çıkış Yap",
+                              style: AppText.contextSemiBold,
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                    shape: Border.all(color: AppColors.lightPrimary),
+                    splashRadius: 20,
+                    icon: const Icon(
+                      Icons.add,
+                      color: Colors.transparent,
+                    ),
+                    offset: const Offset(0, 36),
+                    color: AppColors.lightSecondary,
+                    elevation: 0,
+                  ),
+                ],
+              ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             )
           ],
@@ -69,7 +171,7 @@ class _HomeState extends State<Home> {
               AppCards.taskCard(
                   color: AppColors.lightWarning,
                   header: "header",
-                  task: "tasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktasktask",
+                  task: "task",
                   date: "22/03/2022",
                   userName: "Burak Ünal"),
               const SizedBox(height: 10),
