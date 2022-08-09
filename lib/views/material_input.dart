@@ -139,6 +139,7 @@ class MaterialInput extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 AppForm.appTextFormField(
+                  maxLines: 3,
                   label: "Açıklama",
                   hint: "Ekstra bilgileri buraya ekleyebilirsiniz. ",
                   controller: _explanationController,

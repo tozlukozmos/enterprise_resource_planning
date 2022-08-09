@@ -40,7 +40,7 @@ class MaterialDetails extends StatelessWidget {
                         child: Column(
                           children: [
                             AppForm.appTextFormField(
-                              enabled: false,
+                              isEnabled: false,
                               label: "İsim",
                               hint: "örn. Gizli Ayak",
                               controller: _nameController,
@@ -48,7 +48,7 @@ class MaterialDetails extends StatelessWidget {
                             ),
                             const SizedBox(height: 24),
                             AppForm.appSearchableDropDownField(
-                              enabled: false,
+                              isEnabled: false,
                               items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
                               label: "Cins",
                               onChanged: (value){},
@@ -98,7 +98,7 @@ class MaterialDetails extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: AppForm.appTextFormField(
-                        enabled: false,
+                        isEnabled: false,
                         label: "Miktar",
                         hint: "örn. 380",
                         controller: _amountController,
@@ -108,7 +108,7 @@ class MaterialDetails extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: AppForm.appSearchableDropDownField(
-                        enabled: false,
+                        isEnabled: false,
                         items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
                         label: 'Miktar Birimi',
                         onChanged: (value){},
@@ -123,7 +123,7 @@ class MaterialDetails extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: AppForm.appSearchableDropDownField(
-                        enabled: false,
+                        isEnabled: false,
                         items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
                         label: "Boyut",
                         onChanged: (value){},
@@ -134,7 +134,7 @@ class MaterialDetails extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: AppForm.appSearchableDropDownField(
-                        enabled: false,
+                        isEnabled: false,
                         items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
                         label: "Renk",
                         onChanged: (value){},
@@ -145,7 +145,8 @@ class MaterialDetails extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 AppForm.appTextFormField(
-                  enabled: false,
+                  maxLines: 3,
+                  isEnabled: false,
                   label: "Açıklama",
                   hint: "Ekstra bilgileri buraya ekleyebilirsiniz.",
                   controller: _explanationController,

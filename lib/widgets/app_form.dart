@@ -11,7 +11,9 @@ class AppForm {
     required BuildContext context,
     bool isPassword = false,
     bool isEmail = false,
-    bool enabled = true,
+    bool isEnabled = true,
+    bool isExpands = false,
+    int maxLines = 1,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -19,7 +21,9 @@ class AppForm {
         Text(label, style: AppText.labelSemiBold),
         const SizedBox(height: 4),
         TextFormField(
-          enabled: enabled,
+          expands: isExpands,
+          maxLines: maxLines,
+          enabled: isEnabled,
           controller: controller,
           keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
           obscureText: isPassword,
@@ -40,7 +44,7 @@ class AppForm {
     bool isPassword = false,
     bool isEmail = false,
     bool isPrefixIcon = true,
-    bool enabled = true,
+    bool isEnabled = true,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -48,7 +52,7 @@ class AppForm {
         Text(label, style: AppText.labelSemiBold),
         const SizedBox(height: 4),
         TextFormField(
-          enabled: enabled,
+          enabled: isEnabled,
           controller: controller,
           keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
           obscureText: isPassword,
@@ -68,14 +72,14 @@ class AppForm {
     required Function(String?) onChanged,
     required selectedItem,
     required BuildContext context,
-    bool enabled = true,
+    bool isEnabled = true,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(label, style: AppText.labelSemiBold,),
         DropdownSearch<String>(
-          enabled: enabled,
+          enabled: isEnabled,
           popupProps: PopupProps.menu(
             menuProps:
             const MenuProps(backgroundColor: Color.fromRGBO(242, 242, 242, 1)),
