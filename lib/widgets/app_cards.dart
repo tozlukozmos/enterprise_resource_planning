@@ -5,41 +5,31 @@ import 'package:flutter/material.dart';
 class AppCards {
   static Widget taskCard({
     required Color color,
-    required String header,
+    required String title,
     required String task,
     required String date,
-    required String userName,
+    required String fullName,
   }) {
     return Container(
-      decoration: BoxDecoration(
-          color: const Color.fromRGBO(39, 52, 105, 0.04),
-          borderRadius: BorderRadius.circular(4)),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.only(left: 16, top: 4, bottom: 16),
+        decoration: BoxDecoration(
+          color: AppColors.lightPrimary.withOpacity(0.04),
+          borderRadius: BorderRadius.circular(4),
+        ),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
                   children: [
-                    Container(
-                      height: 19,
-                      width: 19,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(100),
-                        color: color,
-                      ),
-                    ),
+                    CircleAvatar(backgroundColor: color, radius: 9),
                     const SizedBox(width: 12),
-                    Text(
-                      header,
-                      style: AppText.contextSemiBold,
-                    )
+                    Text(title, style: AppText.contextSemiBold)
                   ],
                 ),
                 PopupMenuButton<int>(
+                  padding: const EdgeInsets.all(8),
                   itemBuilder: (context) => [
                     PopupMenuItem(
                       onTap: () {},
@@ -47,16 +37,11 @@ class AppCards {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.update_outlined,
+                            Icons.published_with_changes_rounded,
                             color: AppColors.lightPrimary,
                           ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "İşleme Al",
-                            style: AppText.contextSemiBold,
-                          )
+                          const SizedBox(width: 10),
+                          Text("İşleme Al", style: AppText.contextSemiBold),
                         ],
                       ),
                     ),
@@ -66,16 +51,25 @@ class AppCards {
                       child: Row(
                         children: [
                           const Icon(
-                            Icons.add_alert_outlined,
+                            Icons.alarm_add_rounded,
                             color: AppColors.lightPrimary,
                           ),
-                          const SizedBox(
-                            width: 10,
+                          const SizedBox(width: 10),
+                          Text("Alarm Ekle", style: AppText.contextSemiBold),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
+                      onTap: () {},
+                      value: 3,
+                      child: Row(
+                        children: [
+                          const Icon(
+                            Icons.error_outline_rounded,
+                            color: AppColors.lightPrimary,
                           ),
-                          Text(
-                            "Alarm Ekle",
-                            style: AppText.contextSemiBold,
-                          )
+                          const SizedBox(width: 10),
+                          Text("Hata Bildir", style: AppText.contextSemiBold),
                         ],
                       ),
                     ),
@@ -83,41 +77,37 @@ class AppCards {
                   shape: Border.all(color: AppColors.lightPrimary),
                   splashRadius: 20,
                   icon: const Icon(
-                    Icons.more_vert,
-                    color: AppColors.lightPrimary,
+                    Icons.more_vert_rounded,
+                    color: AppColors.lightBlack,
                   ),
-                  offset: const Offset(0, 36),
+                  offset: const Offset(0, 44),
                   color: AppColors.lightSecondary,
                   elevation: 0,
                 ),
               ],
             ),
-            const SizedBox(
-              height: 10,
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.only(right: 16),
+              child: Text(task, style: AppText.context),
             ),
-            Text(
-              task,
-              style: AppText.context,
-            ),
-            const SizedBox(
-              height: 70,
-            ),
+            const SizedBox(height: 20),
             Row(
               children: [
                 Container(
-                  height: 30,
-                  width: 100,
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                      color: const Color.fromRGBO(39, 52, 105, 0.04),
-                      borderRadius: BorderRadius.circular(4)),
+                    color: AppColors.lightPrimary.withOpacity(0.04),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       const Icon(
                         Icons.date_range_rounded,
                         color: AppColors.lightBlack,
                         size: 20,
                       ),
+                      const SizedBox(width: 10),
                       Text(
                         date,
                         style: const TextStyle(
@@ -132,21 +122,21 @@ class AppCards {
                 ),
                 const SizedBox(width: 16),
                 Container(
-                  height: 30,
-                  width: 100,
+                  padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                      color: const Color.fromRGBO(39, 52, 105, 0.04),
-                      borderRadius: BorderRadius.circular(4)),
+                    color: AppColors.lightPrimary.withOpacity(0.04),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       const Icon(
-                        Icons.person,
+                        Icons.person_outline_rounded,
                         color: AppColors.lightBlack,
                         size: 20,
                       ),
+                      const SizedBox(width: 10),
                       Text(
-                        userName,
+                        fullName,
                         style: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w400,
@@ -160,8 +150,7 @@ class AppCards {
               ],
             )
           ],
-        ),
-      ),
+        )
     );
   }
 
@@ -179,9 +168,8 @@ class AppCards {
           onTap: onTap,
           child: Card(
             color: AppColors.lightGrey,
-            shape: RoundedRectangleBorder(
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.circular(100)),
-              side: BorderSide(color: Colors.transparent, width: 3),
             ),
             child: Container(
               padding: const EdgeInsets.all(10.0),
@@ -190,7 +178,7 @@ class AppCards {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(icon, size: 20, color: AppColors.lightPrimary),
+                  Icon(icon, size: 24, color: AppColors.lightPrimary),
                   const SizedBox(height: 10),
                   Expanded(
                     child: Text(

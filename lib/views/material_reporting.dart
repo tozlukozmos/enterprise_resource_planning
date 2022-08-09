@@ -74,7 +74,8 @@ class MaterialReporting extends StatelessWidget {
                                 border: Border.all(
                                     color: AppColors.lightPrimary,
                                     style: BorderStyle.solid
-                                )
+                                ),
+                              borderRadius: BorderRadius.circular(4),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

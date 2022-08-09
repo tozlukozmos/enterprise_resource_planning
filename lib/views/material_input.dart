@@ -19,8 +19,8 @@ class MaterialInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _typeController = '';
-     _unitController = '';
-     _sizeController = '';
+    _unitController = '';
+    _sizeController = '';
     _colorController = '';
 
     return SafeArea(
@@ -36,25 +36,25 @@ class MaterialInput extends StatelessWidget {
                 Row(
                   children: [
                     Expanded(
-                      flex: 1,
+                        flex: 1,
                         child: Column(
-                      children: [
-                        AppForm.appTextFormField(
-                          label: "İsim",
-                          hint: "örn. Gizli Ayak",
-                          controller: _nameController,
-                          context: context,
-                        ),
-                        const SizedBox(height: 24),
-                        AppForm.appSearchableDropDownField(
-                          items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
-                          label: "Cins",
-                          onChanged: (value){},
-                          selectedItem: _typeController,
-                          context: context,
-                        ),
-                      ],
-                    )),
+                          children: [
+                            AppForm.appTextFormField(
+                              label: "İsim",
+                              hint: "örn. Gizli Ayak",
+                              controller: _nameController,
+                              context: context,
+                            ),
+                            const SizedBox(height: 24),
+                            AppForm.appSearchableDropDownField(
+                              items: ["Abdulkadir", "Ömer Faruk", "Furkan"],
+                              label: "Cins",
+                              onChanged: (value){},
+                              selectedItem: _typeController,
+                              context: context,
+                            ),
+                          ],
+                        )),
                     const SizedBox(width: 24),
                     Expanded(
                       flex: 1,
@@ -63,28 +63,29 @@ class MaterialInput extends StatelessWidget {
                           debugPrint('Görsel Ekle');
                         },
                         child: Container(
-                          width: 171,
-                          height: 156,
-                          decoration: BoxDecoration(
-                            color: AppColors.lightPrimary.withOpacity(0.04),
-                            border: Border.all(
-                              color: AppColors.lightPrimary,
-                              style: BorderStyle.solid
+                            width: 171,
+                            height: 156,
+                            decoration: BoxDecoration(
+                                color: AppColors.lightPrimary.withOpacity(0.04),
+                                border: Border.all(
+                                    color: AppColors.lightPrimary,
+                                    style: BorderStyle.solid
+                                ),
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                const Icon(Icons.image, size: 53, color: AppColors.lightPrimary,),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Icon(Icons.add,size: 36, color: AppColors.lightPrimary,),
+                                    Text('Görsel Ekle', style: AppText.contextSemiBold,),
+                                  ],
+                                )
+                              ],
                             )
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const Icon(Icons.image, size: 53, color: AppColors.lightPrimary,),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(Icons.add,size: 36, color: AppColors.lightPrimary,),
-                                  Text('Görsel Ekle', style: AppText.contextSemiBold,),
-                                ],
-                              )
-                            ],
-                          )
                         ),
                       ),
                     ),
@@ -96,11 +97,11 @@ class MaterialInput extends StatelessWidget {
                     Expanded(
                       flex: 1,
                       child: AppForm.appTextFormField(
-                      label: "Miktar",
-                      hint: "örn. 380",
-                      controller: _amountController,
-                      context: context,
-                    ),),
+                        label: "Miktar",
+                        hint: "örn. 380",
+                        controller: _amountController,
+                        context: context,
+                      ),),
                     const SizedBox(width: 24),
                     Expanded(
                       flex: 1,
