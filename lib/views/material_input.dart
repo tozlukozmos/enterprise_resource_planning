@@ -1,21 +1,41 @@
+import 'dart:math';
+
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:enterprise_resource_planning/design/app_colors.dart';
 import 'package:enterprise_resource_planning/design/app_text.dart';
 import '../widgets/app_form.dart';
 
-class MaterialInput extends StatelessWidget {
+class MaterialInput extends StatefulWidget {
   MaterialInput({Key? key}) : super(key: key);
 
+  @override
+  State<MaterialInput> createState() => _MaterialInputState();
+}
+
+class _MaterialInputState extends State<MaterialInput> {
   final TextEditingController _nameController = TextEditingController();
+
   final TextEditingController _typeController = TextEditingController();
+
   final TextEditingController _amountController = TextEditingController();
+
   final TextEditingController _unitController = TextEditingController();
+
   final TextEditingController _sizeController = TextEditingController();
+
   final TextEditingController _colorController = TextEditingController();
+
   final TextEditingController _explanationController = TextEditingController();
 
+  int randomQr = 0;
+
   @override
+  void initState() {
+    super.initState();
+    randomQr = generateRandomQr();
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -36,7 +56,13 @@ class MaterialInput extends StatelessWidget {
                         hint: "ör. Gizli Ayak",
                         controller: _nameController,
                         key: GlobalKey(),
-                        suggestions: ["Çivi", "Sunta", "Sünger", "Vida", "Gizli Ayak"],
+                        suggestions: [
+                          "Çivi",
+                          "Sunta",
+                          "Sünger",
+                          "Vida",
+                          "Gizli Ayak"
+                        ],
                         isRequired: true,
                       ),
                       const SizedBox(height: 24),
@@ -102,7 +128,8 @@ class MaterialInput extends StatelessWidget {
                                     size: 28,
                                     color: AppColors.lightPrimary,
                                   ),
-                                  Text('Görsel Ekle', style: AppText.contextSemiBold),
+                                  Text('Görsel Ekle',
+                                      style: AppText.contextSemiBold),
                                 ],
                               ),
                             ],
@@ -150,5 +177,12 @@ class MaterialInput extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  int generateRandomQr() {
+    int temp;
+    var random = Random();
+    temp = random.nextInt(999999999);
+    return temp;
   }
 }

@@ -162,17 +162,19 @@ class _HomeState extends State<Home> {
                 AppCards.processCard(
                     icon: FluentIcons.subtract_square_24_regular,
                     text: "Hammadde Çıkış",
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed("material_output_view");
-                    }),
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      "barcode_scanner_view",
+                      arguments: {'screen':"material_output_view"},
+                    )),
                 AppCards.processCard(
                     icon: FluentIcons.slide_text_24_regular,
                     text: "Detayları Gör",
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed("material_details_view");
-                    }),
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      "barcode_scanner_view",
+                      arguments: {'screen':"material_details_view"},
+                    )),
                 AppCards.processCard(
                     icon: FluentIcons.slide_add_24_regular,
                     text: "Bitmiş Ürün Giriş",
@@ -184,10 +186,11 @@ class _HomeState extends State<Home> {
                 AppCards.processCard(
                     icon: FluentIcons.clipboard_error_24_regular,
                     text: "Hammadde Hata Bildir",
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed("material_reporting_view");
-                    }),
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      "barcode_scanner_view",
+                      arguments: {'screen':"material_reporting_view"},
+                    )),
               ],),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
