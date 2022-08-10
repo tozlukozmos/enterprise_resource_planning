@@ -1,8 +1,6 @@
 import 'package:enterprise_resource_planning/widgets/app_alerts.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:enterprise_resource_planning/design/app_colors.dart';
-import 'package:enterprise_resource_planning/design/app_text.dart';
+import '../widgets/app_cards.dart';
 import '../widgets/app_form.dart';
 
 class MaterialOutput extends StatelessWidget {
@@ -77,42 +75,7 @@ class MaterialOutput extends StatelessWidget {
                   child: Column(
                     children: [
                       const SizedBox(height: 8),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          width: 171,
-                          height: 156,
-                          decoration: BoxDecoration(
-                            color: AppColors.lightPrimary.withOpacity(0.04),
-                            border: Border.all(
-                              color: AppColors.lightPrimary,
-                              style: BorderStyle.solid,
-                            ),
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const Icon(
-                                FluentIcons.image_24_regular,
-                                size: 53,
-                                color: AppColors.lightPrimary,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    FluentIcons.add_24_regular,
-                                    size: 28,
-                                    color: AppColors.lightPrimary,
-                                  ),
-                                  Text('Görsel Ekle', style: AppText.contextSemiBold),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      const ImagePickerWidget(),
                       const SizedBox(height: 24),
                       AppForm.appTextFormField(
                         label: "Miktar Birimi",
@@ -141,13 +104,7 @@ class MaterialOutput extends StatelessWidget {
               isEnabled: false,
             ),
             const SizedBox(height: 24),
-            // AppAlerts.success("Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir."),
-            // const SizedBox(height: 24),
-            // AppAlerts.error("Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir."),
-            // const SizedBox(height: 24),
             AppAlerts.info("Stokta 380 Adet Gizli Ayak vardır"),
-            // const SizedBox(height: 24),
-            // AppAlerts.warning("Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir."),
             const SizedBox(height: 24),
             Align(
               alignment: Alignment.centerRight,

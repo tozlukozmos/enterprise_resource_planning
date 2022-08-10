@@ -1,7 +1,6 @@
 import 'package:enterprise_resource_planning/design/app_colors.dart';
 import 'package:enterprise_resource_planning/design/app_text.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
-import 'package:enterprise_resource_planning/widgets/app_form.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
@@ -23,7 +22,7 @@ class _HomeState extends State<Home> {
         appBar: AppBar(
           leading: Padding(
             padding: const EdgeInsets.only(left: 24),
-            child: Image.asset("assets/images/Group 59.png"),
+            child: Image.asset("assets/images/logo.png"),
           ),
           leadingWidth: 160,
           actions: [
@@ -192,23 +191,6 @@ class _HomeState extends State<Home> {
                       arguments: {'screen':"material_reporting_view"},
                     )),
               ],),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                SizedBox(height: 32),
-                Center(
-                  child: Text(
-                    "Copyright © Solvio Yazılım",
-                    style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400,
-                      letterSpacing: 0.4,
-                      color: AppColors.lightPrimary,
-                    ),
-                  ),
-                ),
-              ],
-            ),
           ],
         ),
       ),

@@ -2,6 +2,9 @@ import 'package:enterprise_resource_planning/design/app_colors.dart';
 import 'package:enterprise_resource_planning/design/app_text.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
+import 'package:flutter/services.dart';
 
 class AppCards {
   static Widget taskCard({
@@ -199,6 +202,125 @@ class AppCards {
               ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  static Widget addImgCard({
+  required void Function() onTap
+}){
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        height: 156,
+        decoration: BoxDecoration(
+          color: AppColors.lightPrimary.withOpacity(0.04),
+          border: Border.all(
+            color: AppColors.lightPrimary,
+            style: BorderStyle.solid,
+          ),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Icon(
+              FluentIcons.image_24_regular,
+              size: 53,
+              color: AppColors.lightPrimary,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  FluentIcons.add_24_regular,
+                  size: 28,
+                  color: AppColors.lightPrimary,
+                ),
+                Text('Görsel Ekle', style: AppText.contextSemiBold),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+
+
+  }
+}
+
+class ImagePickerWidget extends StatefulWidget {
+  const ImagePickerWidget({Key? key}) : super(key: key);
+
+  @override
+  State<ImagePickerWidget> createState() => _ImagePickerWidgetState();
+}
+
+class _ImagePickerWidgetState extends State<ImagePickerWidget> {
+  File? image;
+
+  Future pickImage(ImageSource source) async {
+    try {
+      final image = await ImagePicker().pickImage(source: source);
+      if (image == null) return;
+
+      final imageTemporary = File(image.path);
+      setState(() => this.image = imageTemporary);
+    } on PlatformException catch (e) {
+      print('Resim yükleme başarısız oldu: $e');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: (){showModalBottomSheet(context: context, builder: (context) =>
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: <Widget>[
+              ListTile(
+                leading: const Icon(FluentIcons.content_view_gallery_24_regular),
+                title: const Text('Galeriden fotoğraf seç'),
+                onTap: () {pickImage(ImageSource.gallery);},
+              ),
+              ListTile(
+                leading: const Icon(FluentIcons.camera_24_regular),
+                title: const Text('Kamera ile fotoğraf çek'),
+                onTap: () {pickImage(ImageSource.camera);},
+              ),
+            ],
+          ));},
+      child: image != null ? Image.file(image!, height: 156) : Container(
+        height: 156,
+        decoration: BoxDecoration(
+          color: AppColors.lightPrimary.withOpacity(0.04),
+          border: Border.all(
+            color: AppColors.lightPrimary,
+            style: BorderStyle.solid,
+          ),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const Icon(
+              FluentIcons.image_24_regular,
+              size: 53,
+              color: AppColors.lightPrimary,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(
+                  FluentIcons.add_24_regular,
+                  size: 28,
+                  color: AppColors.lightPrimary,
+                ),
+                Text('Görsel Ekle', style: AppText.contextSemiBold),
+              ],
+            ),
+          ],
         ),
       ),
     );
