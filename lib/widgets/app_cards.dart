@@ -75,7 +75,10 @@ class AppCards {
                       ),
                     ),
                   ],
-                  shape: Border.all(color: AppColors.lightPrimary),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    side: const BorderSide(color: AppColors.lightPrimary),
+                  ),
                   splashRadius: 20,
                   icon: const Icon(
                     FluentIcons.more_vertical_24_regular,

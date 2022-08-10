@@ -1,5 +1,6 @@
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 
 import '../design/app_colors.dart';
@@ -161,3 +162,51 @@ class AppForm {
     );
   }
 }
+
+class PasswordFieldWithVisibility extends StatefulWidget {
+  const PasswordFieldWithVisibility({Key? key}) : super(key: key);
+
+  @override
+  State<PasswordFieldWithVisibility> createState() => _PasswordFieldWithVisibilityState();
+}
+
+class _PasswordFieldWithVisibilityState extends State<PasswordFieldWithVisibility> {
+  bool isObscure = true;
+
+  void changePasswordVisibility() {
+    setState(() {
+      isObscure = !isObscure;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Şifre", style: AppText.labelSemiBold),
+            const SizedBox(height: 4),
+            TextFormField(
+              obscureText: isObscure,
+              decoration: InputDecoration(
+                hintText: "Şifre 6 ila 18 karakter olmalı",
+                suffixIcon: IconButton(
+                  onPressed: changePasswordVisibility,
+                  icon: Icon(!isObscure ? FluentIcons.eye_24_regular : FluentIcons.eye_off_24_regular),
+                ),
+              ),
+            ),
+          ],
+        ),
+        Positioned(
+          right: 0,
+          top: 0,
+          child: Text("Şifremi Unuttum", style: AppText.label),
+        ),
+      ],
+    );
+  }
+}
+

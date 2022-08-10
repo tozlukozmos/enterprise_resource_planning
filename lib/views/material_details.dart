@@ -28,7 +28,7 @@ class MaterialDetails extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Hammadde Çıkışı"),
+          title: const Text("Detayları Göster"),
         ),
         body: ListView(
           padding: const EdgeInsets.all(24),

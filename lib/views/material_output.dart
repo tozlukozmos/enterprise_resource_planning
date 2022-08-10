@@ -28,7 +28,7 @@ class MaterialOutput extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Hammadde Çıkışı"),
+          title: const Text("Hammadde Çıkış"),
         ),
         body: ListView(
           padding: const EdgeInsets.all(24),

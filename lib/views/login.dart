@@ -46,32 +46,15 @@ class _LoginState extends State<Login> {
                     children: [
                       Text("Hoş geldiniz", style: AppText.titleSemiBold),
                       const SizedBox(height: 4),
-                      Text("Giriş yapmak için email & şifrenizi giriniz.", style: AppText.context),
+                      Text("Giriş yapmak için kullanıcı adınızı & şifrenizi giriniz.", style: AppText.helper),
                       const SizedBox(height: 32),
                       AppForm.appTextFormField(
-                        label: "Email",
-                        hint: "isminiz@domain.com",
+                        label: "Kullanıcı Adı",
+                        hint: "ör. isimsoyisim",
                         controller: TextEditingController(),
-                        isEmail: true,
                       ),
                       const SizedBox(height: 24),
-                      Stack(
-                        children: [
-                          AppForm.appTextFormFieldIcon(
-                            label: "Şifre",
-                            hint: "Şifreniz 6 ila 18 karakter arası olmalı",
-                            icon: const Icon(FluentIcons.eye_off_24_regular),
-                            controller: TextEditingController(),
-                            isPrefixIcon: false,
-                            isPassword: true,
-                          ),
-                          Positioned(
-                            top: 0,
-                            right: 0,
-                            child: Text("Şifremi Unuttum", style: AppText.label),
-                          ),
-                        ],
-                      ),
+                      const PasswordFieldWithVisibility(),
                       const SizedBox(height: 12),
                       Row(
                         children: [

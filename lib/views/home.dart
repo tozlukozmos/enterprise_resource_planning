@@ -37,6 +37,7 @@ class _HomeState extends State<Home> {
                   backgroundImage: AssetImage("assets/images/avatar.png"),
                 ),
                 PopupMenuButton<int>(
+                  tooltip: "Profil Menüsü",
                   padding: const EdgeInsets.all(8),
                   itemBuilder: (context) => [
                     PopupMenuItem(
@@ -96,7 +97,10 @@ class _HomeState extends State<Home> {
                       ),
                     )
                   ],
-                  shape: Border.all(color: AppColors.lightPrimary),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                    side: const BorderSide(color: AppColors.lightPrimary),
+                  ),
                   splashRadius: 20,
                   icon: const Icon(
                     Icons.add,

@@ -29,7 +29,7 @@ class MaterialReporting extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Hammadde Hata Bildirimi"),
+          title: const Text("Hammadde Hata Bildir"),
         ),
         body: ListView(
           padding: const EdgeInsets.all(24),
