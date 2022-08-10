@@ -280,18 +280,32 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                leading: const Icon(FluentIcons.content_view_gallery_24_regular),
-                title: const Text('Galeriden fotoğraf seç'),
+                leading: const Icon(FluentIcons.content_view_gallery_24_regular, color: AppColors.lightPrimary,),
+                title: Text('Galeriden fotoğraf seç', style: AppText.context),
                 onTap: () {pickImage(ImageSource.gallery);},
+                tileColor: AppColors.lightSecondary,
               ),
               ListTile(
-                leading: const Icon(FluentIcons.camera_24_regular),
-                title: const Text('Kamera ile fotoğraf çek'),
+                leading: const Icon(FluentIcons.camera_24_regular, color: AppColors.lightPrimary,),
+                title: Text('Kamera ile fotoğraf çek', style: AppText.context),
                 onTap: () {pickImage(ImageSource.camera);},
+                tileColor: AppColors.lightSecondary,
               ),
             ],
           ));},
-      child: image != null ? Image.file(image!, height: 156) : Container(
+      child: image != null ? Container(
+        width: 171,
+        height: 156,
+        decoration: BoxDecoration(
+          color: AppColors.lightPrimary.withOpacity(0.04),
+          border: Border.all(
+            color: AppColors.lightPrimary,
+            style: BorderStyle.solid,
+          ),
+          borderRadius: BorderRadius.circular(4),
+        ),
+        child: Image.file(image!, fit: BoxFit.cover),
+      ) : Container(
         height: 156,
         decoration: BoxDecoration(
           color: AppColors.lightPrimary.withOpacity(0.04),
