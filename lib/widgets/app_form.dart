@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../design/app_colors.dart';
 import '../design/app_text.dart';
+import '../utils/form_validation.dart';
 
 class AppForm {
   static Widget appTextFormField({
@@ -33,6 +34,17 @@ class AppForm {
         ),
         const SizedBox(height: 4),
         TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "${label.toLowerCase()} alanı boş bırakılamaz.";
+            } else if (isEmail) {
+              return FormValidation.validateEmail(value);
+            } else if (isPassword) {
+              return FormValidation.validatePassword(value);
+            } else {
+              return null;
+            }
+          },
           expands: isExpands,
           maxLines: maxLines,
           enabled: isEnabled,
@@ -73,6 +85,17 @@ class AppForm {
         ),
         const SizedBox(height: 4),
         TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "${label.toLowerCase()} alanı boş bırakılamaz.";
+            } else if (isEmail) {
+              return FormValidation.validateEmail(value);
+            } else if (isPassword) {
+              return FormValidation.validatePassword(value);
+            } else {
+              return null;
+            }
+          },
           enabled: isEnabled,
           controller: controller,
           keyboardType: isEmail ? TextInputType.emailAddress : TextInputType.text,
@@ -164,7 +187,8 @@ class AppForm {
 }
 
 class PasswordFieldWithVisibility extends StatefulWidget {
-  const PasswordFieldWithVisibility({Key? key}) : super(key: key);
+  const PasswordFieldWithVisibility({Key? key, required this.controller}) : super(key: key);
+  final TextEditingController controller;
 
   @override
   State<PasswordFieldWithVisibility> createState() => _PasswordFieldWithVisibilityState();
@@ -189,6 +213,16 @@ class _PasswordFieldWithVisibilityState extends State<PasswordFieldWithVisibilit
             Text("Şifre", style: AppText.labelSemiBold),
             const SizedBox(height: 4),
             TextFormField(
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return "şifre alanı boş bırakılamaz.";
+                } else if (value != null || value.isNotEmpty) {
+                  return FormValidation.validatePassword(value);
+                } else {
+                  return null;
+                }
+              },
+              controller: widget.controller,
               obscureText: isObscure,
               decoration: InputDecoration(
                 hintText: "Şifre 6 ila 18 karakter olmalı",

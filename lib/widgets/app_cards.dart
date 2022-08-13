@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:enterprise_resource_planning/design/app_colors.dart';
 import 'package:enterprise_resource_planning/design/app_text.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
@@ -21,6 +22,7 @@ class AppCards {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -179,7 +181,7 @@ class AppCards {
               borderRadius: BorderRadius.all(Radius.circular(100)),
             ),
             child: Container(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(16),
               width: 90,
               height: 90,
               child: Column(
@@ -191,10 +193,11 @@ class AppCards {
                     child: Text(
                       text,
                       style: const TextStyle(
-                          color: AppColors.lightPrimary,
-                          fontFamily: 'SourceSansPro',
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12),
+                        color: AppColors.lightPrimary,
+                        fontFamily: 'SourceSansPro',
+                        fontWeight: FontWeight.w600,
+                        fontSize: 10,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -205,48 +208,6 @@ class AppCards {
         ),
       ),
     );
-  }
-
-  static Widget addImgCard({
-  required void Function() onTap
-}){
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        height: 156,
-        decoration: BoxDecoration(
-          color: AppColors.lightPrimary.withOpacity(0.04),
-          border: Border.all(
-            color: AppColors.lightPrimary,
-            style: BorderStyle.solid,
-          ),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Icon(
-              FluentIcons.image_24_regular,
-              size: 53,
-              color: AppColors.lightPrimary,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  FluentIcons.add_24_regular,
-                  size: 28,
-                  color: AppColors.lightPrimary,
-                ),
-                Text('Görsel Ekle', style: AppText.contextSemiBold),
-              ],
-            ),
-          ],
-        ),
-      ),
-    );
-
-
   }
 }
 
@@ -305,36 +266,37 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
           borderRadius: BorderRadius.circular(4),
         ),
         child: Image.file(image!, fit: BoxFit.cover),
-      ) : Container(
-        height: 156,
-        decoration: BoxDecoration(
-          color: AppColors.lightPrimary.withOpacity(0.04),
-          border: Border.all(
-            color: AppColors.lightPrimary,
-            style: BorderStyle.solid,
+      ) : DottedBorder(
+        color: AppColors.lightPrimary,
+        strokeWidth: 1,
+        dashPattern: const [8, 4],
+        radius: const Radius.circular(4),
+        child: Container(
+          height: 153,
+          decoration: BoxDecoration(
+            color: AppColors.lightPrimary.withOpacity(0.04),
           ),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            const Icon(
-              FluentIcons.image_24_regular,
-              size: 53,
-              color: AppColors.lightPrimary,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Icon(
-                  FluentIcons.add_24_regular,
-                  size: 28,
-                  color: AppColors.lightPrimary,
-                ),
-                Text('Görsel Ekle', style: AppText.contextSemiBold),
-              ],
-            ),
-          ],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Icon(
+                FluentIcons.image_24_regular,
+                size: 53,
+                color: AppColors.lightPrimary,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Icon(
+                    FluentIcons.add_24_regular,
+                    size: 28,
+                    color: AppColors.lightPrimary,
+                  ),
+                  Text('Görsel Ekle', style: AppText.contextSemiBold),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

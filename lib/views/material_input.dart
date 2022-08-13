@@ -1,10 +1,18 @@
 import 'dart:math';
+
+import 'package:enterprise_resource_planning/models/app_material.dart';
+import 'package:enterprise_resource_planning/models/app_process.dart';
+import 'package:enterprise_resource_planning/services/material_service.dart';
+import 'package:enterprise_resource_planning/services/process_service.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
 import 'package:flutter/material.dart';
+import '../models/user.dart';
+import '../storage/storage.dart';
+import '../widgets/app_alerts.dart';
 import '../widgets/app_form.dart';
 
 class MaterialInput extends StatefulWidget {
-  MaterialInput({Key? key}) : super(key: key);
+  const MaterialInput({Key? key}) : super(key: key);
 
   @override
   State<MaterialInput> createState() => _MaterialInputState();
@@ -12,18 +20,19 @@ class MaterialInput extends StatefulWidget {
 
 class _MaterialInputState extends State<MaterialInput> {
   final TextEditingController _nameController = TextEditingController();
-
   final TextEditingController _typeController = TextEditingController();
-
   final TextEditingController _amountController = TextEditingController();
-
   final TextEditingController _unitController = TextEditingController();
-
   final TextEditingController _sizeController = TextEditingController();
-
   final TextEditingController _colorController = TextEditingController();
-
   final TextEditingController _explanationController = TextEditingController();
+
+  List<String> nameSuggestions = ["Çivi", "Sunta", "Sünger", "Gizli Ayak",];
+  List<String> typeSuggestions = ["Uzun", "Kısa", "Orta", "Gözenekli"];
+  List<String> amountSuggestions = ["200", "24", "380", "120"];
+  List<String> unitSuggestions = ["Paket", "Adet", "Metre", "Kg"];
+  List<String> sizeSuggestions = ["14 cm", "16 cm", "20 cm", "5 m"];
+  List<String> colorSuggestions = ["Kırmızı", "Yeşil", "Mor", "Mavi"];
 
   int randomQr = 0;
 
@@ -33,6 +42,7 @@ class _MaterialInputState extends State<MaterialInput> {
     randomQr = generateRandomQr();
   }
 
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -53,13 +63,7 @@ class _MaterialInputState extends State<MaterialInput> {
                         hint: "ör. Gizli Ayak",
                         controller: _nameController,
                         key: GlobalKey(),
-                        suggestions: [
-                          "Çivi",
-                          "Sunta",
-                          "Sünger",
-                          "Vida",
-                          "Gizli Ayak"
-                        ],
+                        suggestions: nameSuggestions,
                         isRequired: true,
                       ),
                       const SizedBox(height: 24),
@@ -68,7 +72,7 @@ class _MaterialInputState extends State<MaterialInput> {
                         hint: "ör. Uzun",
                         controller: _typeController,
                         key: GlobalKey(),
-                        suggestions: ["Uzun", "Kısa", "Orta", "Gözenekli"],
+                        suggestions: typeSuggestions,
                       ),
                       const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(
@@ -76,7 +80,7 @@ class _MaterialInputState extends State<MaterialInput> {
                         hint: "ör. 380",
                         controller: _amountController,
                         key: GlobalKey(),
-                        suggestions: ["200", "24", "380", "120"],
+                        suggestions: amountSuggestions,
                         isRequired: true,
                       ),
                       const SizedBox(height: 24),
@@ -85,7 +89,7 @@ class _MaterialInputState extends State<MaterialInput> {
                         hint: "ör. 12 cm",
                         controller: _sizeController,
                         key: GlobalKey(),
-                        suggestions: ["14 cm", "16 cm", "20 cm", "5 m"],
+                        suggestions: sizeSuggestions,
                       ),
                     ],
                   ),
@@ -103,7 +107,7 @@ class _MaterialInputState extends State<MaterialInput> {
                         hint: "ör. Adet",
                         controller: _unitController,
                         key: GlobalKey(),
-                        suggestions: ["Paket", "Adet", "Metre", "Kg"],
+                        suggestions: unitSuggestions,
                         isRequired: true,
                       ),
                       const SizedBox(height: 24),
@@ -112,7 +116,7 @@ class _MaterialInputState extends State<MaterialInput> {
                         hint: "ör. Ceviz",
                         controller: _colorController,
                         key: GlobalKey(),
-                        suggestions: ["Kırmızı", "Yeşil", "Mor", "Mavi"],
+                        suggestions: colorSuggestions,
                       ),
                     ],
                   ),
@@ -130,7 +134,7 @@ class _MaterialInputState extends State<MaterialInput> {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: addMaterial,
                 child: const Text("Giriş İşlemini Tamamla"),
               ),
             ),
@@ -140,10 +144,92 @@ class _MaterialInputState extends State<MaterialInput> {
     );
   }
 
+  Future<String> getUserId() async {
+    final SecureStorage secureStorage = SecureStorage();
+    return await secureStorage.readSecureData('userId');
+  }
+
+  void addMaterial() {
+    if(_nameController.text.isNotEmpty && _amountController.text.isNotEmpty && _unitController.text.isNotEmpty) {
+      AppMaterial materialData = AppMaterial(
+        materialId: 0,
+        referenceNumber: randomQr,
+        imageUrl: "",
+        materialName: _nameController.text.toLowerCase(),
+        typeName: _typeController.text.toLowerCase(),
+        unitName: _unitController.text.toLowerCase(),
+        amount: _amountController.text.isEmpty ? 0 : int.parse(_amountController.text),
+        colorName: _colorController.text.toLowerCase(),
+        sizeName: _sizeController.text.toLowerCase(),
+        description: _explanationController.text,
+        createdAt: "",
+        updatedAt: "",
+      );
+      MaterialService.addMaterial(materialData).then((value) {
+        if (value["success"]){
+          addProcess(AppMaterial.fromJson(value["data"]));
+          AppAlerts.toast(message: value["message"]);
+        } else {
+          AppAlerts.toast(message: value["message"]);
+        }
+      });
+    } else {
+      AppAlerts.toast(message: "Lütfen zorunlu alanları doldurunuz.");
+    }
+  }
+
+  void addProcess(AppMaterial material) async {
+    User userData = User(
+      userId: int.parse(await getUserId()),
+      username: "", 
+      firstName: "", 
+      lastName: "", 
+      email: "", 
+      password: "", 
+      phoneNumber: "", 
+      departmentName: "", 
+      imageUrl: "", 
+      isAdmin: false, 
+      createdAt: "", 
+      updatedAt: "",
+    );
+    
+    AppProcess processData = AppProcess(
+      processId: 0,
+      user: userData,
+      material: material, 
+      amount: int.parse(_amountController.text), 
+      processTypeName: "giriş",
+      createdAt: "",
+      updatedAt: "",
+    );
+
+    ProcessService.addProcess(processData).then((value) {
+      if (value["success"]){
+        Navigator.pushReplacementNamed(context, 'home_view');
+      } else {
+        AppAlerts.toast(message: value["message"]);
+      }
+    });
+
+  }
+
   int generateRandomQr() {
     int temp;
     var random = Random();
     temp = random.nextInt(999999999);
     return temp;
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _typeController.dispose();
+    _amountController.dispose();
+    _unitController.dispose();
+    _sizeController.dispose();
+    _colorController.dispose();
+    _explanationController.dispose();
+    super.dispose();
   }
 }

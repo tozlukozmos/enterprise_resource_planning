@@ -1,9 +1,13 @@
 import 'package:enterprise_resource_planning/design/app_colors.dart';
 import 'package:enterprise_resource_planning/design/app_text.dart';
+import 'package:enterprise_resource_planning/utils/helpers.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:intl/intl.dart';
+
+import '../storage/storage.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -13,10 +17,60 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final SecureStorage secureStorage = SecureStorage();
   List<DropdownMenuItem> items = [];
+
+  Future<String> getFirstName() async {
+    return await secureStorage.readSecureData('firstName');
+  }
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> menuCards = [
+      AppCards.processCard(
+        icon: FluentIcons.add_square_24_regular,
+        text: "Hammadde Giriş",
+        onTap: () => Navigator.of(context).pushNamed("material_input_view"),
+      ),
+      AppCards.processCard(
+        icon: FluentIcons.subtract_square_24_regular,
+        text: "Hammadde Çıkış",
+        onTap: () => Navigator.pushNamed(
+          context,
+          "barcode_scanner_view",
+          arguments: {'screen':"material_output_view"},
+        ),
+      ),
+      AppCards.processCard(
+        icon: FluentIcons.slide_text_24_regular,
+        text: "Detayları Gör",
+        onTap: () => Navigator.pushNamed(
+          context,
+          "barcode_scanner_view",
+          arguments: {'screen':"material_details_view"},
+        ),
+      ),
+      AppCards.processCard(
+        icon: FluentIcons.slide_add_24_regular,
+        text: "Bitmiş Ürün Giriş",
+        onTap: () {},
+      ),
+      AppCards.processCard(
+        icon: FluentIcons.vehicle_truck_bag_20_regular,
+        text: "Bitmiş Ürün Çıkış",
+        onTap: () {},
+      ),
+      AppCards.processCard(
+        icon: FluentIcons.clipboard_error_24_regular,
+        text: "Hammadde Hata Bildir",
+        onTap: () => Navigator.pushNamed(
+          context,
+          "barcode_scanner_view",
+          arguments: {'screen':"material_reporting_view"},
+        ),
+      ),
+    ];
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -82,7 +136,7 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     PopupMenuItem(
-                      onTap: () {},
+                      onTap: logOut,
                       value: 4,
                       child: Row(
                         children: [
@@ -122,16 +176,21 @@ class _HomeState extends State<Home> {
               children: [
                 Row(
                   children: [
-                    Text("Hoş geldin, ", style: AppText.contextSemiBold),
-                    Text("Burak", style: AppText.context),
+                    Text("Hoş geldin, ", style: AppText.labelSemiBold),
+                    FutureBuilder(
+                      future: getFirstName(),
+                      builder: (context, snapshot) {
+                        return Text(Helpers.titleCase(snapshot.data.toString()), style: AppText.label);
+                      },
+                    ),
                   ],
                 ),
-                Text("5 Ağustos 2022, Cuma", style: AppText.contextSemiBold)
+                Text(DateFormat.MMMMEEEEd("tr").format(DateTime.now()), style: AppText.labelSemiBold)
               ],
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
             Divider(thickness: 1, color: AppColors.lightPrimary.withOpacity(.16)),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             Text("Görevleriniz", style: AppText.titleSemiBold),
             const SizedBox(height: 16),
             AppCards.taskCard(
@@ -139,61 +198,25 @@ class _HomeState extends State<Home> {
               title: "header",
               task: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır.",
               date: "22/03/2022",
-              fullName: "Burak Ünal",
+              fullName: "Burak",
             ),
             const SizedBox(height: 32),
             Text("İşlemler Menüsü", style: AppText.titleSemiBold),
             const SizedBox(height: 16),
-            GridView.count(
-              physics: const NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              crossAxisSpacing: 4,
-              mainAxisSpacing: 4,
-              crossAxisCount: 3,
-              children: [
-                AppCards.processCard(
-                    icon: FluentIcons.add_square_24_regular,
-                    text: "Hammadde Giriş",
-                    onTap: () {
-                      Navigator.of(context)
-                          .pushNamed("material_input_view");
-                    }),
-                AppCards.processCard(
-                    icon: FluentIcons.subtract_square_24_regular,
-                    text: "Hammadde Çıkış",
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      "barcode_scanner_view",
-                      arguments: {'screen':"material_output_view"},
-                    )),
-                AppCards.processCard(
-                    icon: FluentIcons.slide_text_24_regular,
-                    text: "Detayları Gör",
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      "barcode_scanner_view",
-                      arguments: {'screen':"material_details_view"},
-                    )),
-                AppCards.processCard(
-                    icon: FluentIcons.slide_add_24_regular,
-                    text: "Bitmiş Ürün Giriş",
-                    onTap: () {}),
-                AppCards.processCard(
-                    icon: FluentIcons.vehicle_truck_bag_20_regular,
-                    text: "Bitmiş Ürün Çıkış",
-                    onTap: () {}),
-                AppCards.processCard(
-                    icon: FluentIcons.clipboard_error_24_regular,
-                    text: "Hammadde Hata Bildir",
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      "barcode_scanner_view",
-                      arguments: {'screen':"material_reporting_view"},
-                    )),
-              ],),
+            Wrap(
+              alignment: WrapAlignment.spaceBetween,
+              runSpacing: 12,
+              children: menuCards,
+            ),
           ],
         ),
       ),
     );
+  }
+
+  void logOut() async {
+    await secureStorage.deleteAllSecureData().then((value) => {
+      Navigator.pushReplacementNamed(context, 'login_view'),
+    });
   }
 }

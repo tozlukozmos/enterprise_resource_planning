@@ -1,9 +1,12 @@
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
+import 'dart:io';
+import 'package:enterprise_resource_planning/widgets/app_alerts.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../design/app_colors.dart';
 import '../design/app_text.dart';
+import '../services/user_service.dart';
 import '../widgets/app_form.dart';
 
 class Login extends StatefulWidget {
@@ -14,6 +17,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
   bool isChecked = false;
 
   @override
@@ -42,6 +49,7 @@ class _LoginState extends State<Login> {
                 SvgPicture.asset("assets/images/hero-login.svg", height: 120),
                 const SizedBox(height: 20),
                 Form(
+                  key: _formKey,
                   child: Column(
                     children: [
                       Text("Hoş geldiniz", style: AppText.titleSemiBold),
@@ -51,10 +59,10 @@ class _LoginState extends State<Login> {
                       AppForm.appTextFormField(
                         label: "Kullanıcı Adı",
                         hint: "ör. isimsoyisim",
-                        controller: TextEditingController(),
+                        controller: _usernameController,
                       ),
                       const SizedBox(height: 24),
-                      const PasswordFieldWithVisibility(),
+                      PasswordFieldWithVisibility(controller: _passwordController),
                       const SizedBox(height: 12),
                       Row(
                         children: [
@@ -74,7 +82,7 @@ class _LoginState extends State<Login> {
                       Align(
                         alignment: Alignment.centerRight,
                         child: ElevatedButton(
-                          onPressed: () {Navigator.pushReplacementNamed(context, "home_view");},
+                          onPressed: logIn,
                           child: const Text("Giriş Yap"),
                         ),
                       ),
@@ -85,9 +93,9 @@ class _LoginState extends State<Login> {
             ),
           ),
           bottomNavigationBar: Container(
-            height: 69,
+            height: 45,
             alignment: Alignment.bottomCenter,
-            padding: const EdgeInsets.all(24),
+            padding: const EdgeInsets.only(bottom: 24),
             child: const Text(
               "Copyright © Solvio Yazılım",
               style: TextStyle(
@@ -102,6 +110,43 @@ class _LoginState extends State<Login> {
       ),
     );
   }
+
+  void logIn() async {
+    try {
+      if (_formKey.currentState!.validate()) {
+        await UserService.logIn(
+          _usernameController.text,
+          _passwordController.text,
+        ).then((value) => {
+          if (value["success"]){
+            Navigator.pushReplacementNamed(context, 'home_view'),
+            AppAlerts.toast(message: value["message"]),
+          } else {
+            AppAlerts.toast(message: value["message"]),
+          },
+        },
+        );
+      }
+    } on SocketException catch (e) {
+      AppAlerts.toast(message: "İnternet bağlantınızı kontrol ediniz.");
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          padding: const EdgeInsets.all(20),
+          content: Text(e.toString()),
+          duration: const Duration(milliseconds: 1500),
+        ),
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _usernameController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
 }
 
 class MyBehavior extends ScrollBehavior {
