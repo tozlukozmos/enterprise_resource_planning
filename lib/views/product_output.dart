@@ -12,14 +12,14 @@ import '../storage/storage.dart';
 import '../widgets/app_alerts.dart';
 import '../widgets/app_form.dart';
 
-class MaterialInput extends StatefulWidget {
-  const MaterialInput({Key? key}) : super(key: key);
+class ProductOutput extends StatefulWidget {
+  const ProductOutput({Key? key}) : super(key: key);
 
   @override
-  State<MaterialInput> createState() => _MaterialInputState();
+  State<ProductOutput> createState() => _ProductOutputState();
 }
 
-class _MaterialInputState extends State<MaterialInput> {
+class _ProductOutputState extends State<ProductOutput> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
@@ -48,7 +48,7 @@ class _MaterialInputState extends State<MaterialInput> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Hammadde Girişi"),
+          title: const Text("Bitmiş Ürün Çıkış"),
         ),
         body: ListView(
           padding: const EdgeInsets.all(24),
@@ -184,25 +184,24 @@ class _MaterialInputState extends State<MaterialInput> {
   void addProcess(AppMaterial material) async {
     User userData = User(
       userId: int.parse(await getUserId()),
-      username: "", 
-      firstName: "", 
-      lastName: "", 
-      email: "", 
-      password: "", 
-      phoneNumber: "", 
-      departmentName: "", 
-      imageUrl: "", 
-      isAdmin: false, 
-      createdAt: "", 
+      username: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      phoneNumber: "",
+      departmentName: "",
+      imageUrl: "",
+      isAdmin: false,
+      createdAt: "",
       updatedAt: "",
-
     );
-    
+
     AppProcess processData = AppProcess(
       processId: 0,
       user: userData,
-      material: material, 
-      amount: int.parse(_amountController.text), 
+      material: material,
+      amount: int.parse(_amountController.text),
       processTypeName: "giriş",
       createdAt: "",
       updatedAt: "",

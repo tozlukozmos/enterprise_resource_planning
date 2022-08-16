@@ -39,21 +39,22 @@ class _MaterialReportingState extends State<MaterialReporting> {
         body: FutureBuilder(
           future: getByReferenceNumber(BarcodeScanner.referenceNumber),
           builder: (context, AsyncSnapshot<Map<String, dynamic>> snapshot) {
-            if(snapshot.hasError) {
+            if (snapshot.hasError) {
               return const Text('Something went wrong');
-            } else if(snapshot.connectionState == ConnectionState.waiting) {
+            } else if (snapshot.connectionState == ConnectionState.waiting) {
               return SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: 300,
                 child: const Center(child: CircularProgressIndicator()),
               );
-            } else if(snapshot.data!["data"] == null) {
+            } else if (snapshot.data!["data"] == null) {
               return Container(
                 margin: const EdgeInsets.all(24),
                 child: AppAlerts.error("Herhangi bir kayıt bulunamadı."),
               );
             } else {
-              AppMaterial material = AppMaterial.fromJson(snapshot.data!["data"]);
+              AppMaterial material =
+                  AppMaterial.fromJson(snapshot.data!["data"]);
 
               _nameController.text = material.materialName;
               _typeController.text = material.typeName;
@@ -86,12 +87,12 @@ class _MaterialReportingState extends State<MaterialReporting> {
                               isEnabled: false,
                             ),
                             const SizedBox(height: 24),
-                            AppForm.appAutoCompleteTextFormField(
+                            AppForm.appTextFormFieldRegexNumber(
                               label: "Miktar",
                               hint: "ör. 380",
                               controller: _amountController,
                               key: GlobalKey(),
-                              suggestions: ["200", "24", "380", "120"],
+                              keyboardType: TextInputType.number,
                               isRequired: true,
                             ),
                             const SizedBox(height: 24),
@@ -148,12 +149,15 @@ class _MaterialReportingState extends State<MaterialReporting> {
                     isEnabled: false,
                   ),
                   const SizedBox(height: 24),
-                  AppAlerts.info("Stokta ${material.amount} ${material.unitName} ${material.materialName} vardır"),
+                  AppAlerts.info(
+                      "Stokta ${material.amount} ${material.unitName} ${material.materialName} vardır"),
                   const SizedBox(height: 24),
                   Align(
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
-                      onPressed: () {updateMaterial(material);},
+                      onPressed: () {
+                        updateMaterial(material);
+                      },
                       child: const Text("Hata Bildirimini Tamamla"),
                     ),
                   ),
@@ -176,13 +180,14 @@ class _MaterialReportingState extends State<MaterialReporting> {
   }
 
   void updateMaterial(AppMaterial material) {
-    if(_amountController.text.isNotEmpty && _errorTypeController.text.isNotEmpty) {
-      if(currentStock >= int.parse(_amountController.text)) {
+    if (_amountController.text.isNotEmpty &&
+        _errorTypeController.text.isNotEmpty) {
+      if (currentStock >= int.parse(_amountController.text)) {
         material.amount = currentStock - int.parse(_amountController.text);
         print(material.amount);
         MaterialService.updateMaterial(material).then((value) {
           print(value);
-          if (value["success"]){
+          if (value["success"]) {
             addProcess(AppMaterial.fromJson(value["data"]));
             AppAlerts.toast(message: value["message"]);
           } else {
@@ -224,13 +229,12 @@ class _MaterialReportingState extends State<MaterialReporting> {
     );
 
     ProcessService.addProcess(processData).then((value) {
-      if (value["success"]){
+      if (value["success"]) {
         Navigator.pushReplacementNamed(context, 'home_view');
       } else {
         AppAlerts.toast(message: value["message"]);
       }
     });
-
   }
 
   @override

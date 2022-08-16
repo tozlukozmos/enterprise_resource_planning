@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
-
 import './views/home.dart';
 import './views/login.dart';
 import 'design/app_theme_data.dart';
@@ -8,8 +7,11 @@ import 'routes/routes.dart';
 import 'storage/storage.dart';
 
 void main() {
+
   initializeDateFormatting('tr_TR', null).then((_) => runApp(const MyApp()));
 }
+
+
 
 class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -39,6 +41,8 @@ class _MyAppState extends State<MyApp> {
           // initialRoute: snapshot.data == null ? "login_view" : "home_view",
           routes: routes,
           supportedLocales: const [Locale("en", "US"), Locale("tr", "TR")],
+
+
         );
       },
     );

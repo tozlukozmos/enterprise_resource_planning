@@ -4,7 +4,7 @@ import 'package:enterprise_resource_planning/utils/helpers.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
 import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+
 import 'package:intl/intl.dart';
 
 import '../storage/storage.dart';
@@ -38,7 +38,7 @@ class _HomeState extends State<Home> {
         onTap: () => Navigator.pushNamed(
           context,
           "barcode_scanner_view",
-          arguments: {'screen':"material_output_view"},
+          arguments: {'screen': "material_output_view"},
         ),
       ),
       AppCards.processCard(
@@ -47,18 +47,22 @@ class _HomeState extends State<Home> {
         onTap: () => Navigator.pushNamed(
           context,
           "barcode_scanner_view",
-          arguments: {'screen':"material_details_view"},
+          arguments: {'screen': "material_details_view"},
         ),
       ),
       AppCards.processCard(
         icon: FluentIcons.slide_add_24_regular,
         text: "Bitmiş Ürün Giriş",
-        onTap: () {},
+        onTap: () => Navigator.of(context).pushNamed("product_input_view"),
       ),
       AppCards.processCard(
         icon: FluentIcons.vehicle_truck_bag_20_regular,
         text: "Bitmiş Ürün Çıkış",
-        onTap: () {},
+        onTap: () => Navigator.pushNamed(
+          context,
+          "barcode_scanner_view",
+          arguments: {'screen': "product_output_view"},
+        ),
       ),
       AppCards.processCard(
         icon: FluentIcons.clipboard_error_24_regular,
@@ -66,7 +70,7 @@ class _HomeState extends State<Home> {
         onTap: () => Navigator.pushNamed(
           context,
           "barcode_scanner_view",
-          arguments: {'screen':"material_reporting_view"},
+          arguments: {'screen': "material_reporting_view"},
         ),
       ),
     ];
@@ -80,7 +84,7 @@ class _HomeState extends State<Home> {
           ),
           leadingWidth: 160,
           actions: [
-            const Icon(Iconsax.notification),
+            /*const Icon(Iconsax.notification),*/
             const SizedBox(width: 12),
             Stack(
               alignment: Alignment.center,
@@ -93,48 +97,6 @@ class _HomeState extends State<Home> {
                   tooltip: "Profil Menüsü",
                   padding: const EdgeInsets.all(8),
                   itemBuilder: (context) => [
-                    PopupMenuItem(
-                      onTap: () {},
-                      value: 1,
-                      child: Row(
-                        children: [
-                          const Icon(
-                            FluentIcons.person_28_regular,
-                            color: AppColors.lightPrimary,
-                          ),
-                          const SizedBox(width: 10),
-                          Text("Profil", style: AppText.contextSemiBold),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      onTap: () {},
-                      value: 2,
-                      child: Row(
-                        children: [
-                          const Icon(
-                            FluentIcons.settings_24_regular,
-                            color: AppColors.lightPrimary,
-                          ),
-                          const SizedBox(width: 10),
-                          Text("Ayarlar", style: AppText.contextSemiBold),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      onTap: () {},
-                      value: 3,
-                      child: Row(
-                        children: [
-                          const Icon(
-                            FluentIcons.chat_help_24_regular,
-                            color: AppColors.lightPrimary,
-                          ),
-                          const SizedBox(width: 10),
-                          Text("Yardım", style: AppText.contextSemiBold),
-                        ],
-                      ),
-                    ),
                     PopupMenuItem(
                       onTap: logOut,
                       value: 4,
@@ -180,27 +142,92 @@ class _HomeState extends State<Home> {
                     FutureBuilder(
                       future: getFirstName(),
                       builder: (context, snapshot) {
-                        return Text(Helpers.titleCase(snapshot.data.toString()), style: AppText.label);
+                        return Text(Helpers.titleCase(snapshot.data.toString()),
+                            style: AppText.label);
                       },
                     ),
                   ],
                 ),
-                Text(DateFormat.MMMMEEEEd("tr").format(DateTime.now()), style: AppText.labelSemiBold)
+                Text(DateFormat.MMMMEEEEd("tr").format(DateTime.now()),
+                    style: AppText.labelSemiBold)
               ],
             ),
             const SizedBox(height: 12),
-            Divider(thickness: 1, color: AppColors.lightPrimary.withOpacity(.16)),
+            Divider(
+                thickness: 1, color: AppColors.lightPrimary.withOpacity(.16)),
             const SizedBox(height: 20),
-            Text("Görevleriniz", style: AppText.titleSemiBold),
-            const SizedBox(height: 16),
-            AppCards.taskCard(
-              color: AppColors.lightWarning,
-              title: "header",
-              task: "Lorem Ipsum, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır.",
-              date: "22/03/2022",
-              fullName: "Burak",
+            Container(
+              height: 200,
+              decoration: BoxDecoration(
+                color: Colors.yellow,
+                borderRadius: BorderRadius.circular(4),
+                gradient: const LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomLeft,
+                    colors: [
+                      AppColors.lightSecondary,
+                      AppColors.lightPrimary,
+                    ]),
+                image: const DecorationImage(
+                  image: AssetImage('assets/images/add-image.jpg'),
+                  fit: BoxFit.cover,
+                  opacity: 0.2,
+                ),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: const [
+                        Icon(
+                          FluentIcons.autocorrect_24_regular,
+                          size: 40,
+
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          "Görevlendirme Sistemi...",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.4,
+
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: const [
+                        Icon(
+                          FluentIcons.arrow_circle_up_24_regular,
+                          size: 40,
+
+                        ),
+                        SizedBox(
+                          width: 4,
+                        ),
+                        Text(
+                          "Şimdi Yükselt",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            letterSpacing: 0.4,
+
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 20),
             Text("İşlemler Menüsü", style: AppText.titleSemiBold),
             const SizedBox(height: 16),
             Wrap(
@@ -216,7 +243,7 @@ class _HomeState extends State<Home> {
 
   void logOut() async {
     await secureStorage.deleteAllSecureData().then((value) => {
-      Navigator.pushReplacementNamed(context, 'login_view'),
-    });
+          Navigator.pushReplacementNamed(context, 'login_view'),
+        });
   }
 }

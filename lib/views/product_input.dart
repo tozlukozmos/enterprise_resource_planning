@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:enterprise_resource_planning/models/app_material.dart';
 import 'package:enterprise_resource_planning/models/app_process.dart';
 import 'package:enterprise_resource_planning/services/material_service.dart';
@@ -12,14 +10,14 @@ import '../storage/storage.dart';
 import '../widgets/app_alerts.dart';
 import '../widgets/app_form.dart';
 
-class MaterialInput extends StatefulWidget {
-  const MaterialInput({Key? key}) : super(key: key);
+class ProductInput extends StatefulWidget {
+  const ProductInput({Key? key}) : super(key: key);
 
   @override
-  State<MaterialInput> createState() => _MaterialInputState();
+  State<ProductInput> createState() => _ProductInputState();
 }
 
-class _MaterialInputState extends State<MaterialInput> {
+class _ProductInputState extends State<ProductInput> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
@@ -48,7 +46,7 @@ class _MaterialInputState extends State<MaterialInput> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Hammadde Girişi"),
+          title: const Text("Bitmiş Ürün Giriş"),
         ),
         body: ListView(
           padding: const EdgeInsets.all(24),
@@ -85,7 +83,6 @@ class _MaterialInputState extends State<MaterialInput> {
                         isRequired: true,
 
                       ),
-
                       const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(
                         label: "Boyut",
@@ -184,25 +181,24 @@ class _MaterialInputState extends State<MaterialInput> {
   void addProcess(AppMaterial material) async {
     User userData = User(
       userId: int.parse(await getUserId()),
-      username: "", 
-      firstName: "", 
-      lastName: "", 
-      email: "", 
-      password: "", 
-      phoneNumber: "", 
-      departmentName: "", 
-      imageUrl: "", 
-      isAdmin: false, 
-      createdAt: "", 
+      username: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      phoneNumber: "",
+      departmentName: "",
+      imageUrl: "",
+      isAdmin: false,
+      createdAt: "",
       updatedAt: "",
-
     );
-    
+
     AppProcess processData = AppProcess(
       processId: 0,
       user: userData,
-      material: material, 
-      amount: int.parse(_amountController.text), 
+      material: material,
+      amount: int.parse(_amountController.text),
       processTypeName: "giriş",
       createdAt: "",
       updatedAt: "",

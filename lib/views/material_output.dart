@@ -85,13 +85,14 @@ class _MaterialOutputState extends State<MaterialOutput> {
                               isEnabled: false,
                             ),
                             const SizedBox(height: 24),
-                            AppForm.appAutoCompleteTextFormField(
+                            AppForm.appTextFormFieldRegexNumber(
                               label: "Miktar",
                               hint: "ör. 380",
                               controller: _amountController,
                               key: GlobalKey(),
-                              suggestions: ["200", "24", "380", "120"],
+                              keyboardType: TextInputType.number,
                               isRequired: true,
+
                             ),
                             const SizedBox(height: 24),
                             AppForm.appTextFormField(
