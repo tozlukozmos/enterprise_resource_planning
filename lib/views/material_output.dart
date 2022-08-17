@@ -2,11 +2,12 @@ import 'package:enterprise_resource_planning/models/app_material.dart';
 import 'package:enterprise_resource_planning/services/material_service.dart';
 import 'package:enterprise_resource_planning/widgets/app_alerts.dart';
 import 'package:flutter/material.dart';
+import '../design/app_colors.dart';
 import '../models/app_process.dart';
 import '../models/user.dart';
 import '../services/process_service.dart';
 import '../storage/storage.dart';
-import '../widgets/app_cards.dart';
+
 import '../widgets/app_form.dart';
 import 'barcode_scanner.dart';
 
@@ -110,7 +111,19 @@ class _MaterialOutputState extends State<MaterialOutput> {
                         child: Column(
                           children: [
                             const SizedBox(height: 8),
-                            const ImagePickerWidget(),
+                            Container(
+                              width: 171,
+                              height: 156,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(4),
+                                  border: Border.all(
+                                      color: AppColors.lightPrimary, width: 2),
+                                  image: DecorationImage(
+                                      image: AssetImage(
+                                        'assets/images/add-image.jpg',
+                                      ),
+                                      fit: BoxFit.cover)),
+                            ),
                             const SizedBox(height: 24),
                             AppForm.appTextFormField(
                               label: "Miktar Birimi",

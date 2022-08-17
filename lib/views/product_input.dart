@@ -1,13 +1,6 @@
-import 'dart:math';
-import 'package:enterprise_resource_planning/models/app_material.dart';
-import 'package:enterprise_resource_planning/models/app_process.dart';
-import 'package:enterprise_resource_planning/services/material_service.dart';
-import 'package:enterprise_resource_planning/services/process_service.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
 import 'package:flutter/material.dart';
-import '../models/user.dart';
-import '../storage/storage.dart';
-import '../widgets/app_alerts.dart';
+
 import '../widgets/app_form.dart';
 
 class ProductInput extends StatefulWidget {
@@ -19,27 +12,24 @@ class ProductInput extends StatefulWidget {
 
 class _ProductInputState extends State<ProductInput> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _typeController = TextEditingController();
-  final TextEditingController _amountController = TextEditingController();
-  final TextEditingController _unitController = TextEditingController();
-  final TextEditingController _sizeController = TextEditingController();
-  final TextEditingController _colorController = TextEditingController();
+  final TextEditingController _firmNameController = TextEditingController();
+  final TextEditingController _cityController = TextEditingController();
+  final TextEditingController _countryController = TextEditingController();
+  final TextEditingController _legDetailController = TextEditingController();
+  final TextEditingController _materialTypeController = TextEditingController();
+  final TextEditingController _productIdController = TextEditingController();
+  final TextEditingController _customerNameController = TextEditingController();
+  final TextEditingController _pillowDetailController = TextEditingController();
   final TextEditingController _explanationController = TextEditingController();
+  final TextEditingController _packageAmountController =
+      TextEditingController();
 
-  List<String> nameSuggestions = ["Çivi", "Sunta", "Sünger", "Gizli Ayak",];
-  List<String> typeSuggestions = ["Uzun", "Kısa", "Orta", "Gözenekli"];
-  List<String> amountSuggestions = ["200", "24", "380", "120"];
-  List<String> unitSuggestions = ["Paket", "Adet", "Metre", "Kg"];
-  List<String> sizeSuggestions = ["14 cm", "16 cm", "20 cm", "5 m"];
-  List<String> colorSuggestions = ["Kırmızı", "Yeşil", "Mor", "Mavi"];
-
-  int randomQr = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    randomQr = generateRandomQr();
-  }
+  List<String> nameSuggestions = [""];
+  List<String> typeSuggestions = [""];
+  List<String> amountSuggestions = [""];
+  List<String> unitSuggestions = [""];
+  List<String> sizeSuggestions = [""];
+  List<String> colorSuggestions = [""];
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +47,14 @@ class _ProductInputState extends State<ProductInput> {
                   flex: 1,
                   child: Column(
                     children: [
+                      const SizedBox(height: 8),
+                      const ImagePickerWidget(
+                        label: "Logo Ekle",
+                      ),
+                      const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(
-                        label: "İsim",
-                        hint: "ör. Gizli Ayak",
+                        label: "Ürün Adı",
+                        hint: "ör. Kanepe",
                         controller: _nameController,
                         key: GlobalKey(),
                         suggestions: nameSuggestions,
@@ -67,29 +62,39 @@ class _ProductInputState extends State<ProductInput> {
                       ),
                       const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(
-                        label: "Cins",
-                        hint: "ör. Uzun",
-                        controller: _typeController,
+                        label: "Firma Adı",
+                        hint: "ör. Haliç Mobilya",
+                        controller: _firmNameController,
                         key: GlobalKey(),
                         suggestions: typeSuggestions,
-                      ),
-                      const SizedBox(height: 24),
-                      AppForm.appTextFormFieldRegexNumber(
-                        label: "Miktar",
-                        hint: "ör. 380",
-                        controller: _amountController,
-                        key: GlobalKey(),
-                        keyboardType: TextInputType.number,
                         isRequired: true,
-
                       ),
                       const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(
-                        label: "Boyut",
-                        hint: "ör. 12 cm",
-                        controller: _sizeController,
+                        label: "Şehir",
+                        hint: "ör. Kayseri",
+                        controller: _cityController,
+                        key: GlobalKey(),
+                        suggestions: typeSuggestions,
+                        isRequired: true,
+                      ),
+                      const SizedBox(height: 24),
+                      AppForm.appAutoCompleteTextFormField(
+                        label: "Ayak Detayı",
+                        hint: "ör. Gizli Ayak",
+                        controller: _legDetailController,
                         key: GlobalKey(),
                         suggestions: sizeSuggestions,
+                        isRequired: true,
+                      ),
+                      const SizedBox(height: 24),
+                      AppForm.appAutoCompleteTextFormField(
+                        label: "Ürün Kumaşı",
+                        hint: "ör. Kadife",
+                        controller: _materialTypeController,
+                        key: GlobalKey(),
+                        suggestions: sizeSuggestions,
+                        isRequired: true,
                       ),
                     ],
                   ),
@@ -100,23 +105,53 @@ class _ProductInputState extends State<ProductInput> {
                   child: Column(
                     children: [
                       const SizedBox(height: 8),
-                      const ImagePickerWidget(),
+                      const ImagePickerWidget(
+                        label: "Görsel Ekle",
+                      ),
                       const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(
-                        label: "Miktar Birimi",
-                        hint: "ör. Adet",
-                        controller: _unitController,
+                        label: "Ürün Kodu",
+                        hint: "ör. A1236",
+                        controller: _productIdController,
                         key: GlobalKey(),
                         suggestions: unitSuggestions,
                         isRequired: true,
                       ),
                       const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(
-                        label: "Renk",
-                        hint: "ör. Ceviz",
-                        controller: _colorController,
+                        label: "Müşteri Adı",
+                        hint: "ör. Burak Demir",
+                        controller: _customerNameController,
                         key: GlobalKey(),
                         suggestions: colorSuggestions,
+                        isRequired: true,
+                      ),
+                      const SizedBox(height: 24),
+                      AppForm.appAutoCompleteTextFormField(
+                        label: "Ülke",
+                        hint: "ör. Türkiye",
+                        controller: _countryController,
+                        key: GlobalKey(),
+                        suggestions: colorSuggestions,
+                        isRequired: true,
+                      ),
+                      const SizedBox(height: 24),
+                      AppForm.appAutoCompleteTextFormField(
+                        label: "Kırlent Detayı",
+                        hint: "ör. İnce Dikiş",
+                        controller: _pillowDetailController,
+                        key: GlobalKey(),
+                        suggestions: colorSuggestions,
+                        isRequired: true,
+                      ),
+                      const SizedBox(height: 24),
+                      AppForm.appTextFormFieldRegexNumber(
+                        label: "Paket sayısı",
+                        hint: "ör. 380",
+                        controller: _packageAmountController,
+                        key: GlobalKey(),
+                        keyboardType: TextInputType.number,
+                        isRequired: true,
                       ),
                     ],
                   ),
@@ -126,7 +161,7 @@ class _ProductInputState extends State<ProductInput> {
             const SizedBox(height: 24),
             AppForm.appTextFormField(
               maxLines: 3,
-              label: "Açıklama",
+              label: "Özel Açıklama",
               hint: "Ekstra bilgileri buraya ekleyebilirsiniz. ",
               controller: _explanationController,
             ),
@@ -134,7 +169,7 @@ class _ProductInputState extends State<ProductInput> {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
-                onPressed: addMaterial,
+                onPressed: () {},
                 child: const Text("Giriş İşlemini Tamamla"),
               ),
             ),
@@ -142,94 +177,5 @@ class _ProductInputState extends State<ProductInput> {
         ),
       ),
     );
-  }
-
-  Future<String> getUserId() async {
-    final SecureStorage secureStorage = SecureStorage();
-    return await secureStorage.readSecureData('userId');
-  }
-
-  void addMaterial() {
-    if(_nameController.text.isNotEmpty && _amountController.text.isNotEmpty && _unitController.text.isNotEmpty) {
-      AppMaterial materialData = AppMaterial(
-        materialId: 0,
-        referenceNumber: randomQr,
-        imageUrl: "",
-        materialName: _nameController.text.toLowerCase(),
-        typeName: _typeController.text.toLowerCase(),
-        unitName: _unitController.text.toLowerCase(),
-        amount: _amountController.text.isEmpty ? 0 : int.parse(_amountController.text),
-        colorName: _colorController.text.toLowerCase(),
-        sizeName: _sizeController.text.toLowerCase(),
-        description: _explanationController.text,
-        createdAt: "",
-        updatedAt: "",
-      );
-      MaterialService.addMaterial(materialData).then((value) {
-        if (value["success"]){
-          addProcess(AppMaterial.fromJson(value["data"]));
-          AppAlerts.toast(message: value["message"]);
-        } else {
-          AppAlerts.toast(message: value["message"]);
-        }
-      });
-    } else {
-      AppAlerts.toast(message: "Lütfen zorunlu alanları doldurunuz.");
-    }
-  }
-
-  void addProcess(AppMaterial material) async {
-    User userData = User(
-      userId: int.parse(await getUserId()),
-      username: "",
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      phoneNumber: "",
-      departmentName: "",
-      imageUrl: "",
-      isAdmin: false,
-      createdAt: "",
-      updatedAt: "",
-    );
-
-    AppProcess processData = AppProcess(
-      processId: 0,
-      user: userData,
-      material: material,
-      amount: int.parse(_amountController.text),
-      processTypeName: "giriş",
-      createdAt: "",
-      updatedAt: "",
-    );
-
-    ProcessService.addProcess(processData).then((value) {
-      if (value["success"]){
-        Navigator.pushReplacementNamed(context, 'home_view');
-      } else {
-        AppAlerts.toast(message: value["message"]);
-      }
-    });
-
-  }
-
-  int generateRandomQr() {
-    int temp;
-    var random = Random();
-    temp = random.nextInt(999999999);
-    return temp;
-  }
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _typeController.dispose();
-    _amountController.dispose();
-    _unitController.dispose();
-    _sizeController.dispose();
-    _colorController.dispose();
-    _explanationController.dispose();
-    super.dispose();
   }
 }

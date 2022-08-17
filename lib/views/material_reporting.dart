@@ -111,7 +111,7 @@ class _MaterialReportingState extends State<MaterialReporting> {
                         child: Column(
                           children: [
                             const SizedBox(height: 8),
-                            const ImagePickerWidget(),
+                            const ImagePickerWidget(label: "Görsel Ekle",),
                             const SizedBox(height: 24),
                             AppForm.appTextFormField(
                               label: "Miktar Birimi",

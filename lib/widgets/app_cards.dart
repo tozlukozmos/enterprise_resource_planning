@@ -159,8 +159,7 @@ class AppCards {
               ],
             )
           ],
-        )
-    );
+        ));
   }
 
   static Widget processCard({
@@ -212,7 +211,8 @@ class AppCards {
 }
 
 class ImagePickerWidget extends StatefulWidget {
-  const ImagePickerWidget({Key? key}) : super(key: key);
+  const ImagePickerWidget({Key? key, required this.label}) : super(key: key);
+  final String label;
 
   @override
   State<ImagePickerWidget> createState() => _ImagePickerWidgetState();
@@ -236,69 +236,86 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: (){showModalBottomSheet(context: context, builder: (context) =>
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            children: <Widget>[
-              ListTile(
-                leading: const Icon(FluentIcons.content_view_gallery_24_regular, color: AppColors.lightPrimary,),
-                title: Text('Galeriden fotoğraf seç', style: AppText.context),
-                onTap: () {pickImage(ImageSource.gallery);},
-                tileColor: AppColors.lightSecondary,
+      onTap: () {
+        showModalBottomSheet(
+            context: context,
+            builder: (context) => Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    ListTile(
+                      leading: const Icon(
+                        FluentIcons.content_view_gallery_24_regular,
+                        color: AppColors.lightPrimary,
+                      ),
+                      title: Text('Galeriden fotoğraf seç',
+                          style: AppText.context),
+                      onTap: () {
+                        pickImage(ImageSource.gallery);
+                      },
+                      tileColor: AppColors.lightSecondary,
+                    ),
+                    ListTile(
+                      leading: const Icon(
+                        FluentIcons.camera_24_regular,
+                        color: AppColors.lightPrimary,
+                      ),
+                      title: Text('Kamera ile fotoğraf çek',
+                          style: AppText.context),
+                      onTap: () {
+                        pickImage(ImageSource.camera);
+                      },
+                      tileColor: AppColors.lightSecondary,
+                    ),
+                  ],
+                ));
+      },
+      child: image != null
+          ? Container(
+              width: 171,
+              height: 156,
+              decoration: BoxDecoration(
+                color: AppColors.lightPrimary.withOpacity(0.04),
+                border: Border.all(
+                  color: AppColors.lightPrimary,
+                  style: BorderStyle.solid,
+                ),
+                borderRadius: BorderRadius.circular(4),
               ),
-              ListTile(
-                leading: const Icon(FluentIcons.camera_24_regular, color: AppColors.lightPrimary,),
-                title: Text('Kamera ile fotoğraf çek', style: AppText.context),
-                onTap: () {pickImage(ImageSource.camera);},
-                tileColor: AppColors.lightSecondary,
+              child: Image.file(image!, fit: BoxFit.cover),
+            )
+          : DottedBorder(
+              color: AppColors.lightPrimary,
+              strokeWidth: 1,
+              dashPattern: const [8, 4],
+              radius: const Radius.circular(4),
+              child: Container(
+                height: 153,
+                decoration: BoxDecoration(
+                  color: AppColors.lightPrimary.withOpacity(0.04),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Icon(
+                      FluentIcons.image_24_regular,
+                      size: 53,
+                      color: AppColors.lightPrimary,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const Icon(
+                          FluentIcons.add_24_regular,
+                          size: 28,
+                          color: AppColors.lightPrimary,
+                        ),
+                        Text(widget.label, style: AppText.contextSemiBold),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ],
-          ));},
-      child: image != null ? Container(
-        width: 171,
-        height: 156,
-        decoration: BoxDecoration(
-          color: AppColors.lightPrimary.withOpacity(0.04),
-          border: Border.all(
-            color: AppColors.lightPrimary,
-            style: BorderStyle.solid,
-          ),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        child: Image.file(image!, fit: BoxFit.cover),
-      ) : DottedBorder(
-        color: AppColors.lightPrimary,
-        strokeWidth: 1,
-        dashPattern: const [8, 4],
-        radius: const Radius.circular(4),
-        child: Container(
-          height: 153,
-          decoration: BoxDecoration(
-            color: AppColors.lightPrimary.withOpacity(0.04),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              const Icon(
-                FluentIcons.image_24_regular,
-                size: 53,
-                color: AppColors.lightPrimary,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(
-                    FluentIcons.add_24_regular,
-                    size: 28,
-                    color: AppColors.lightPrimary,
-                  ),
-                  Text('Görsel Ekle', style: AppText.contextSemiBold),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
+            ),
     );
   }
 }

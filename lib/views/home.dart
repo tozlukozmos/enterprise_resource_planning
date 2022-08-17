@@ -179,50 +179,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: const [
-                        Icon(
-                          FluentIcons.autocorrect_24_regular,
-                          size: 40,
 
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          "Görevlendirme Sistemi...",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0.4,
-
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Icon(
-                          FluentIcons.arrow_circle_up_24_regular,
-                          size: 40,
-
-                        ),
-                        SizedBox(
-                          width: 4,
-                        ),
-                        Text(
-                          "Şimdi Yükselt",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: 0.4,
-
-                          ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
