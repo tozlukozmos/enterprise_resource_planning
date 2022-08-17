@@ -1,4 +1,5 @@
 import 'package:enterprise_resource_planning/models/app_material.dart';
+import 'package:enterprise_resource_planning/services/base_service.dart';
 import 'package:enterprise_resource_planning/services/material_service.dart';
 import 'package:enterprise_resource_planning/widgets/app_alerts.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,8 @@ import '../models/app_process.dart';
 import '../models/user.dart';
 import '../services/process_service.dart';
 import '../storage/storage.dart';
-
+import '../utils/helpers.dart';
+import '../widgets/app_cards.dart';
 import '../widgets/app_form.dart';
 import 'barcode_scanner.dart';
 
@@ -55,13 +57,23 @@ class _MaterialOutputState extends State<MaterialOutput> {
             } else {
               AppMaterial material = AppMaterial.fromJson(snapshot.data!["data"]);
 
-              _nameController.text = material.materialName;
+              _nameController.text = Helpers.titleCase(material.materialName);
+              _typeController.text = Helpers.titleCase(material.typeName);
+              // _amountController.text = material.amount.toString();
+              _unitController.text = Helpers.titleCase(material.unitName);
+              _sizeController.text = material.sizeName;
+              _colorController.text = Helpers.titleCase(material.colorName);
+              _explanationController.text = material.description;
+
+              /*_nameController.text = material.materialName;
               _typeController.text = material.typeName;
               _sizeController.text = material.sizeName;
               _unitController.text = material.unitName;
               _colorController.text = material.colorName;
-              _explanationController.text = material.description;
+              _explanationController.text = material.description;*/
               currentStock = material.amount;
+
+              String imageUrl = BaseService.baseUrl + snapshot.data!["data"]["materialImageUrlPath"];
 
               return ListView(
                 padding: const EdgeInsets.all(24),
@@ -111,18 +123,19 @@ class _MaterialOutputState extends State<MaterialOutput> {
                         child: Column(
                           children: [
                             const SizedBox(height: 8),
+                            // const ImagePickerWidget(),
                             Container(
                               width: 171,
                               height: 156,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(4),
-                                  border: Border.all(
-                                      color: AppColors.lightPrimary, width: 2),
-                                  image: DecorationImage(
-                                      image: AssetImage(
-                                        'assets/images/add-image.jpg',
-                                      ),
-                                      fit: BoxFit.cover)),
+                                color: AppColors.lightPrimary.withOpacity(0.04),
+                                border: Border.all(
+                                  color: AppColors.lightPrimary,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Image.network(imageUrl, fit: BoxFit.cover),
                             ),
                             const SizedBox(height: 24),
                             AppForm.appTextFormField(
@@ -152,7 +165,7 @@ class _MaterialOutputState extends State<MaterialOutput> {
                     isEnabled: false,
                   ),
                   const SizedBox(height: 24),
-                  AppAlerts.info("Stokta ${material.amount} ${material.unitName} ${material.materialName} vardır"),
+                  AppAlerts.info("Stokta ${material.amount} ${Helpers.titleCase(material.unitName)} ${Helpers.titleCase(material.materialName)} vardır"),
                   const SizedBox(height: 24),
                   Align(
                     alignment: Alignment.centerRight,

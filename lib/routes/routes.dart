@@ -1,6 +1,7 @@
-import 'package:enterprise_resource_planning/views/barcode_scanner.dart';
 import 'package:flutter/material.dart';
 
+import '../views/barcode_scanner.dart';
+import '../views/help.dart';
 import '../views/home.dart';
 import '../views/login.dart';
 import '../views/material_details.dart';
@@ -17,7 +18,8 @@ Map<String, Widget Function(BuildContext)> routes = {
   "material_output_view": (context) => const MaterialOutput(),
   "material_reporting_view": (context) => const MaterialReporting(),
   "material_details_view": (context) => MaterialDetails(),
-  "barcode_scanner_view" :(context) => const BarcodeScanner(),
-  "product_output_view": (context) => ProductOutput(),
-  "product_input_view": (context) => ProductInput(),
+  "product_input_view": (context) => const ProductInput(),
+  "product_output_view": (context) => const ProductOutput(),
+  "barcode_scanner_view": (context) => const BarcodeScanner(),
+  "help_view": (context) => const Help(),
 };

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +33,22 @@ class _ProductInputState extends State<ProductInput> {
   List<String> sizeSuggestions = [""];
   List<String> colorSuggestions = [""];
 
+  File? image;
+
+  void getSelectedImage(File? img) {
+    setState(() {
+      image = img;
+    });
+  }
+
+  File? image2;
+
+  void getSelectedImage2(File? img) {
+    setState(() {
+      image2 = img;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,8 +66,9 @@ class _ProductInputState extends State<ProductInput> {
                   child: Column(
                     children: [
                       const SizedBox(height: 8),
-                      const ImagePickerWidget(
+                      ImagePickerWidget(
                         label: "Logo Ekle",
+                        getSelectedImage: getSelectedImage,
                       ),
                       const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(
@@ -105,8 +124,9 @@ class _ProductInputState extends State<ProductInput> {
                   child: Column(
                     children: [
                       const SizedBox(height: 8),
-                      const ImagePickerWidget(
+                      ImagePickerWidget(
                         label: "Görsel Ekle",
+                        getSelectedImage: getSelectedImage2,
                       ),
                       const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(

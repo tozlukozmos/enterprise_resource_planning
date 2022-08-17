@@ -1,5 +1,8 @@
+import 'package:enterprise_resource_planning/utils/helpers.dart';
 import 'package:flutter/material.dart';
+import '../design/app_colors.dart';
 import '../models/app_material.dart';
+import '../services/base_service.dart';
 import '../services/material_service.dart';
 import '../widgets/app_alerts.dart';
 import '../widgets/app_cards.dart';
@@ -43,13 +46,15 @@ class MaterialDetails extends StatelessWidget {
             } else {
               AppMaterial material = AppMaterial.fromJson(snapshot.data!["data"]);
 
-              _nameController.text = material.materialName;
-              _typeController.text = material.typeName;
+              _nameController.text = Helpers.titleCase(material.materialName);
+              _typeController.text = Helpers.titleCase(material.typeName);
               _amountController.text = material.amount.toString();
-              _unitController.text = material.unitName;
+              _unitController.text = Helpers.titleCase(material.unitName);
               _sizeController.text = material.sizeName;
-              _colorController.text = material.colorName;
+              _colorController.text = Helpers.titleCase(material.colorName);
               _explanationController.text = material.description;
+
+              String imageUrl = BaseService.baseUrl + snapshot.data!["data"]["materialImageUrlPath"];
 
               return ListView(
                 padding: const EdgeInsets.all(24),
@@ -96,7 +101,19 @@ class MaterialDetails extends StatelessWidget {
                         child: Column(
                           children: [
                             const SizedBox(height: 8),
-                            const ImagePickerWidget(label: "Görsel Ekle",),
+                            Container(
+                              width: 171,
+                              height: 156,
+                              decoration: BoxDecoration(
+                                color: AppColors.lightPrimary.withOpacity(0.04),
+                                border: Border.all(
+                                  color: AppColors.lightPrimary,
+                                  style: BorderStyle.solid,
+                                ),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Image.network(imageUrl, fit: BoxFit.cover),
+                            ),
                             const SizedBox(height: 24),
                             AppForm.appTextFormField(
                               label: "Miktar Birimi",

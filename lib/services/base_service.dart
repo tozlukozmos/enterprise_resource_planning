@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 
 import '../models/user.dart';
 import '../storage/storage.dart';
@@ -84,4 +86,35 @@ class BaseService {
     var body = jsonDecode(utf8.decode(response.bodyBytes));
     return body;
   }
+
+  static Future<Map<String, dynamic>> multipartRequest({
+    required String path,
+    required String fieldName,
+    dynamic data,
+    File? file,
+  }) async {
+    String token = await secureStorage.readSecureData('token') ?? "";
+    var url = Uri.parse(baseUrl + path);
+    var request = http.MultipartRequest('POST', url);
+    request.headers.addAll({"Authorization": "Bearer $token"});
+    request.fields[fieldName] = json.encode(data.toJson()).toString();
+
+    if(file == null) {
+      var bytes = await rootBundle.load('assets/images/placeholder-image.jpg');
+      String tempPath = (await getTemporaryDirectory()).path;
+      File fileData = File('$tempPath/placeholder-image.jpg');
+      await fileData.writeAsBytes(bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
+      request.files.add(await http.MultipartFile.fromPath("file", fileData.path));
+    } else {
+      request.files.add(await http.MultipartFile.fromPath("file", file.path));
+    }
+
+    var response = await request.send();
+    var responded = await http.Response.fromStream(response);
+
+    var body = jsonDecode(utf8.decode(responded.bodyBytes));
+    print(body);
+    return body;
+  }
+
 }

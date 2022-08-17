@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:autocomplete_textfield/autocomplete_textfield.dart';
@@ -7,6 +8,7 @@ import 'package:enterprise_resource_planning/services/material_service.dart';
 import 'package:enterprise_resource_planning/services/process_service.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import '../models/user.dart';
 import '../storage/storage.dart';
 import '../widgets/app_alerts.dart';
@@ -35,6 +37,14 @@ class _MaterialInputState extends State<MaterialInput> {
   List<String> sizeSuggestions = ["14 cm", "16 cm", "20 cm", "5 m"];
   List<String> colorSuggestions = ["Kırmızı", "Yeşil", "Mor", "Mavi"];
 
+  File? image;
+
+  void getSelectedImage(File? img) {
+    setState(() {
+      image = img;
+    });
+  }
+
   int randomQr = 0;
 
   @override
@@ -45,6 +55,8 @@ class _MaterialInputState extends State<MaterialInput> {
 
   @override
   Widget build(BuildContext context) {
+    print(image);
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -103,7 +115,10 @@ class _MaterialInputState extends State<MaterialInput> {
                   child: Column(
                     children: [
                       const SizedBox(height: 8),
-                      const ImagePickerWidget(label: "Görsel Ekle",),
+                      ImagePickerWidget(
+                        getSelectedImage: getSelectedImage,
+                        label: "Görsel Ekle",
+                      ),
                       const SizedBox(height: 24),
                       AppForm.appAutoCompleteTextFormField(
                         label: "Miktar Birimi",
@@ -153,6 +168,9 @@ class _MaterialInputState extends State<MaterialInput> {
   }
 
   void addMaterial() {
+    print(image);
+    // print(Image.asset("assets/images/placeholder-image.jpg"));
+
     if(_nameController.text.isNotEmpty && _amountController.text.isNotEmpty && _unitController.text.isNotEmpty) {
       AppMaterial materialData = AppMaterial(
         materialId: 0,
@@ -168,7 +186,8 @@ class _MaterialInputState extends State<MaterialInput> {
         createdAt: "",
         updatedAt: "",
       );
-      MaterialService.addMaterial(materialData).then((value) {
+
+      MaterialService.addMaterial(materialData, image).then((value) {
         if (value["success"]){
           addProcess(AppMaterial.fromJson(value["data"]));
           AppAlerts.toast(message: value["message"]);
@@ -184,25 +203,25 @@ class _MaterialInputState extends State<MaterialInput> {
   void addProcess(AppMaterial material) async {
     User userData = User(
       userId: int.parse(await getUserId()),
-      username: "", 
-      firstName: "", 
-      lastName: "", 
-      email: "", 
-      password: "", 
-      phoneNumber: "", 
-      departmentName: "", 
-      imageUrl: "", 
-      isAdmin: false, 
-      createdAt: "", 
+      username: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      phoneNumber: "",
+      departmentName: "",
+      imageUrl: "",
+      isAdmin: false,
+      createdAt: "",
       updatedAt: "",
 
     );
-    
+
     AppProcess processData = AppProcess(
       processId: 0,
       user: userData,
-      material: material, 
-      amount: int.parse(_amountController.text), 
+      material: material,
+      amount: int.parse(_amountController.text),
       processTypeName: "giriş",
       createdAt: "",
       updatedAt: "",

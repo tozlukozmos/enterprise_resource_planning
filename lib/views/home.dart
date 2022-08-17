@@ -94,12 +94,28 @@ class _HomeState extends State<Home> {
                   backgroundImage: AssetImage("assets/images/avatar.png"),
                 ),
                 PopupMenuButton<int>(
+                  onSelected: (value) {
+                    if(value == 1) Navigator.pushNamed(context, "help_view");
+                  },
                   tooltip: "Profil Menüsü",
                   padding: const EdgeInsets.all(8),
                   itemBuilder: (context) => [
                     PopupMenuItem(
+                      value: 1,
+                      child: Row(
+                        children: [
+                          const Icon(
+                            FluentIcons.chat_help_24_regular,
+                            color: AppColors.lightPrimary,
+                          ),
+                          const SizedBox(width: 10),
+                          Text("Yardım", style: AppText.contextSemiBold),
+                        ],
+                      ),
+                    ),
+                    PopupMenuItem(
                       onTap: logOut,
-                      value: 4,
+                      value: 2,
                       child: Row(
                         children: [
                           const Icon(
@@ -110,7 +126,7 @@ class _HomeState extends State<Home> {
                           Text("Çıkış Yap", style: AppText.contextSemiBold),
                         ],
                       ),
-                    )
+                    ),
                   ],
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(4),
@@ -142,8 +158,10 @@ class _HomeState extends State<Home> {
                     FutureBuilder(
                       future: getFirstName(),
                       builder: (context, snapshot) {
-                        return Text(Helpers.titleCase(snapshot.data.toString()),
-                            style: AppText.label);
+                        return Text(
+                          Helpers.titleCase(snapshot.data.toString()),
+                          style: AppText.label,
+                        );
                       },
                     ),
                   ],
@@ -153,36 +171,77 @@ class _HomeState extends State<Home> {
               ],
             ),
             const SizedBox(height: 12),
-            Divider(
-                thickness: 1, color: AppColors.lightPrimary.withOpacity(.16)),
+            Divider(thickness: 1, color: AppColors.lightPrimary.withOpacity(.16)),
             const SizedBox(height: 20),
-            Container(
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.yellow,
-                borderRadius: BorderRadius.circular(4),
-                gradient: const LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomLeft,
-                    colors: [
-                      AppColors.lightSecondary,
-                      AppColors.lightPrimary,
-                    ]),
-                image: const DecorationImage(
-                  image: AssetImage('assets/images/add-image.jpg'),
-                  fit: BoxFit.cover,
-                  opacity: 0.2,
+            Stack(
+              children: [
+                Container(
+                  height: 200,
+                  decoration: BoxDecoration(
+                    image: const DecorationImage(
+                      image: AssetImage("assets/images/hero-home.jpg"),
+                      fit: BoxFit.cover,
+                      alignment: Alignment.center,
+                    ),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                 ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-
-                  ],
+                Positioned.fill(
+                  child: Align(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        gradient: const LinearGradient(
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                          colors: [
+                            AppColors.lightPrimary,
+                            Colors.transparent,
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                Positioned(
+                  top: 16,
+                  left: 16,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Baret Tak!",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.4,
+                          color: AppColors.lightSecondary,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        "Gözlük Kullan!",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.4,
+                          color: AppColors.lightSecondary,
+                        ),
+                      ),
+                      SizedBox(height: 8),
+                      Text(
+                        "Eldiven Giy!",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          letterSpacing: 0.4,
+                          color: AppColors.lightSecondary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 20),
             Text("İşlemler Menüsü", style: AppText.titleSemiBold),

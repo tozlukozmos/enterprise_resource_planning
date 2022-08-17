@@ -211,8 +211,9 @@ class AppCards {
 }
 
 class ImagePickerWidget extends StatefulWidget {
-  const ImagePickerWidget({Key? key, required this.label}) : super(key: key);
+  const ImagePickerWidget({Key? key, required this.label, required this.getSelectedImage}) : super(key: key);
   final String label;
+  final Function(File?) getSelectedImage;
 
   @override
   State<ImagePickerWidget> createState() => _ImagePickerWidgetState();
@@ -228,6 +229,9 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
 
       final imageTemporary = File(image.path);
       setState(() => this.image = imageTemporary);
+
+      widget.getSelectedImage(imageTemporary);
+
     } on PlatformException catch (e) {
       print('Resim yükleme başarısız oldu: $e');
     }

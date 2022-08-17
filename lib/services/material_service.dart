@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../models/app_material.dart';
 import 'base_service.dart';
 
@@ -13,10 +15,12 @@ class MaterialService {
     return body;
   }
 
-  static Future<Map<String, dynamic>> addMaterial(AppMaterial material) async {
-    var body = await BaseService.postRequest(
-        path: '/api/v1/materials/addMaterial',
-        data: material
+  static Future<Map<String, dynamic>> addMaterial(AppMaterial material, File? file) async {
+    var body = await BaseService.multipartRequest(
+      path: '/api/v1/materials/addMaterial',
+      fieldName: "material",
+      data: material,
+      file: file,
     );
     return body;
   }
