@@ -36,11 +36,12 @@ class _MyAppState extends State<MyApp> {
           title: "Solvio ERP",
           debugShowCheckedModeBanner: false,
           theme: AppThemeData.lightTheme(context),
+          themeMode: ThemeMode.light,
           darkTheme: AppThemeData.darkTheme(context),
           home: snapshot.data == null ? const Login() : const Home(),
           // initialRoute: snapshot.data == null ? "login_view" : "home_view",
           routes: routes,
-          supportedLocales: const [Locale("en", "US"), Locale("tr", "TR")],
+          //supportedLocales: const [Locale("en", "US"), Locale("tr", "TR")],
 
 
         );

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.solvio.enterprise_resource_planning">
    <application
-        android:label="enterprise_resource_planning"
+        android:label="Solvio ERP"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
