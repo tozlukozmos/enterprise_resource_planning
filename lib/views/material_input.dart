@@ -188,11 +188,15 @@ class _MaterialInputState extends State<MaterialInput> {
       );
 
       MaterialService.addMaterial(materialData, image).then((value) {
+        print('value: ${value}');
         if (value["success"]){
           addProcess(AppMaterial.fromJson(value["data"]));
+          print('appProcess: ${value["data"]}');
           AppAlerts.toast(message: value["message"]);
+          print('appProcess1: ${value["message"]}');
         } else {
           AppAlerts.toast(message: value["message"]);
+          print('appProcess2: ${value["message"]}');
         }
       });
     } else {

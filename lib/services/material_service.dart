@@ -6,7 +6,7 @@ import 'base_service.dart';
 class MaterialService {
 
   static Future<Map<String, dynamic>> getAllMaterials() async {
-    var body = await BaseService.getRequest('/api/v1/materials/getAllMaterials');
+    var body = await BaseService.getRequest('/api/v1/materials/getAllMaterial');
     return body;
   }
 
