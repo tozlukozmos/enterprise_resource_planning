@@ -159,6 +159,64 @@ class AppForm {
     );
   }
 
+
+  static Widget appTextFormFieldRegex({
+    required TextInputFormatter formatter,
+    required String label,
+    required String hint,
+    required TextEditingController controller,
+    bool isPassword = false,
+    bool isEmail = false,
+    bool isRequired = false,
+    bool isEnabled = true,
+    bool isExpands = false,
+    int maxLines = 1,
+  }) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(label, style: AppText.labelSemiBold),
+            isRequired
+                ? const Text("*",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                  color: AppColors.lightError,
+                ))
+                : const Text(""),
+          ],
+        ),
+        const SizedBox(height: 4),
+        TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return "${label.toLowerCase()} alanı boş bırakılamaz.";
+            } else if (isEmail) {
+              return FormValidation.validateEmail(value);
+            } else if (isPassword) {
+              return FormValidation.validatePassword(value);
+            } else {
+              return null;
+            }
+          },
+          expands: isExpands,
+          maxLines: maxLines,
+          enabled: isEnabled,
+          controller: controller,
+          keyboardType:
+          isEmail ? TextInputType.emailAddress : TextInputType.text,
+          inputFormatters: [formatter],
+          obscureText: isPassword,
+          decoration: InputDecoration(
+            hintText: hint,
+          ),
+        ),
+      ],
+    );
+  }
+
   static Widget appTextFormFieldRegexNumber({
     required String label,
     required String hint,

@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:enterprise_resource_planning/widgets/app_alerts.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../design/app_colors.dart';
@@ -56,7 +57,8 @@ class _LoginState extends State<Login> {
                       const SizedBox(height: 4),
                       Text("Giriş yapmak için kullanıcı adınızı & şifrenizi giriniz.", style: AppText.helper),
                       const SizedBox(height: 32),
-                      AppForm.appTextFormField(
+                      AppForm.appTextFormFieldRegex(
+                        formatter:FilteringTextInputFormatter.allow(RegExp(r'\S')),
                         label: "Kullanıcı Adı",
                         hint: "ör. isimsoyisim",
                         controller: _usernameController,
