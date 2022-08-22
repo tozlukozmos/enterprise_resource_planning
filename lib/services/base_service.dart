@@ -9,8 +9,8 @@ import '../models/user.dart';
 import '../storage/storage.dart';
 
 class BaseService {
-  static String baseUrl = 'https://api-first-java-backend-project.herokuapp.com';
-  // static String baseUrl = 'http://192.168.2.112:8080';
+  // static String baseUrl = 'https://api-first-java-backend-project.herokuapp.com';
+  static String baseUrl = 'http://192.168.2.112:8080';
   static SecureStorage secureStorage = SecureStorage();
 
   static Future<Map<String, dynamic>> getRequest(String path) async {
@@ -91,21 +91,16 @@ class BaseService {
     required String path,
     required String fieldName,
     dynamic data,
+    String requestType = 'POST',
     File? file,
   }) async {
     String token = await secureStorage.readSecureData('token') ?? "";
     var url = Uri.parse(baseUrl + path);
-    var request = http.MultipartRequest('POST', url);
+    var request = http.MultipartRequest(requestType, url);
     request.headers.addAll({"Authorization": "Bearer $token"});
     request.fields[fieldName] = json.encode(data.toJson()).toString();
 
-    if(file == null) {
-      var bytes = await rootBundle.load('assets/images/placeholder-image.jpg');
-      String tempPath = (await getTemporaryDirectory()).path;
-      File fileData = File('$tempPath/placeholder-image.jpg');
-      await fileData.writeAsBytes(bytes.buffer.asUint8List(bytes.offsetInBytes, bytes.lengthInBytes));
-      request.files.add(await http.MultipartFile.fromPath("file", fileData.path));
-    } else {
+    if(file != null) {
       request.files.add(await http.MultipartFile.fromPath("file", file.path));
     }
 

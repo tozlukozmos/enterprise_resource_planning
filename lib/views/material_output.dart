@@ -73,7 +73,9 @@ class _MaterialOutputState extends State<MaterialOutput> {
               _explanationController.text = material.description;*/
               currentStock = material.amount;
 
-              String imageUrl = BaseService.baseUrl + snapshot.data!["data"]["materialImageUrlPath"];
+              // String imageUrl = BaseService.baseUrl + snapshot.data!["data"]["materialImageUrlPath"];
+
+              String imageUrl = "${BaseService.baseUrl}/api/v1/images/materials/${material.materialId}";
 
               return ListView(
                 padding: const EdgeInsets.all(24),
@@ -197,7 +199,7 @@ class _MaterialOutputState extends State<MaterialOutput> {
       if(currentStock >= int.parse(_amountController.text)) {
         material.amount = currentStock - int.parse(_amountController.text);
         print(material.amount);
-        MaterialService.updateMaterial(material).then((value) {
+        MaterialService.updateMaterial(material, null).then((value) {
           print(value);
           if (value["success"]){
             addProcess(AppMaterial.fromJson(value["data"]));
@@ -224,7 +226,8 @@ class _MaterialOutputState extends State<MaterialOutput> {
       password: "",
       phoneNumber: "",
       departmentName: "",
-      imageUrl: "",
+      imageName: "",
+      imageData: "",
       isAdmin: false,
       createdAt: "",
       updatedAt: "",

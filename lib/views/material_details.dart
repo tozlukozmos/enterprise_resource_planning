@@ -54,7 +54,9 @@ class MaterialDetails extends StatelessWidget {
               _colorController.text = Helpers.titleCase(material.colorName);
               _explanationController.text = material.description;
 
-              String imageUrl = BaseService.baseUrl + snapshot.data!["data"]["materialImageUrlPath"];
+              // String imageUrl = BaseService.baseUrl + snapshot.data!["data"]["materialImageUrlPath"];
+
+              String imageUrl = "${BaseService.baseUrl}/api/v1/images/materials/${material.materialId}";
 
               return ListView(
                 padding: const EdgeInsets.all(24),
