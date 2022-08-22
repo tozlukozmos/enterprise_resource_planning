@@ -114,7 +114,7 @@ class MaterialDetails extends StatelessWidget {
                                 ),
                                 borderRadius: BorderRadius.circular(4),
                               ),
-                              child: Image.network(imageUrl, fit: BoxFit.cover),
+                              child: material.imageUrl.isNotEmpty ? Image.network(material.imageUrl, fit: BoxFit.cover) : Image.asset("assets/images/placeholder-image.jpg"),
                             ),
                             const SizedBox(height: 24),
                             AppForm.appTextFormField(

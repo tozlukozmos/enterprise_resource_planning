@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:autocomplete_textfield/autocomplete_textfield.dart';
 import 'package:enterprise_resource_planning/models/app_material.dart';
 import 'package:enterprise_resource_planning/models/app_process.dart';
 import 'package:enterprise_resource_planning/services/material_service.dart';
@@ -9,8 +8,7 @@ import 'package:enterprise_resource_planning/services/process_service.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:path/path.dart';
+import 'package:path/path.dart' as path;
 import '../models/user.dart';
 import '../storage/storage.dart';
 import '../widgets/app_alerts.dart';
@@ -48,26 +46,6 @@ class _MaterialInputState extends State<MaterialInput> {
     });
   }
 
-  Future uploadFile() async {
-    if (image == null) return;
-    final fileName = basename(image!.path);
-    print('fileName : ${fileName}');
-    final destination = 'files/$fileName';
-
-    try {
-      final ref = FirebaseStorage.instance
-          .ref(destination)
-          .child('file/');
-      await ref.putFile(image!);
-      FirebaseStorage.instance
-          .ref(destination)
-          .child('file/').getDownloadURL().then((url) => print("Here is the URL of Image $url"));
-    } catch (e) {
-      print('Hata');
-    }
-  }
-
-
   int randomQr = 0;
 
   @override
@@ -78,8 +56,6 @@ class _MaterialInputState extends State<MaterialInput> {
 
   @override
   Widget build(BuildContext context) {
-    print(image);
-
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -175,7 +151,7 @@ class _MaterialInputState extends State<MaterialInput> {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
-                onPressed: uploadFile,
+                onPressed: addMaterial,
                 child: const Text("Giriş İşlemini Tamamla"),
               ),
             ),
@@ -185,21 +161,36 @@ class _MaterialInputState extends State<MaterialInput> {
     );
   }
 
+  Future<String> uploadFile() async {
+    if (image == null) return "";
+
+    final fileName = path.basename(image!.path);
+    final destination = 'files/$fileName';
+
+    final ref = FirebaseStorage.instance.ref(destination).child('file/');
+    await ref.putFile(image!);
+    var url = FirebaseStorage.instance.ref(destination).child('file/').getDownloadURL();
+
+    return url;
+
+  }
+
   Future<String> getUserId() async {
     final SecureStorage secureStorage = SecureStorage();
     return await secureStorage.readSecureData('userId');
   }
 
-  void addMaterial() {
-    print(image);
+  void addMaterial() async {
+    // print(image);
     // print(Image.asset("assets/images/placeholder-image.jpg"));
 
     if(_nameController.text.isNotEmpty && _amountController.text.isNotEmpty && _unitController.text.isNotEmpty) {
       AppMaterial materialData = AppMaterial(
         materialId: 0,
         referenceNumber: randomQr,
-        imageName: "",
-        imageData: "",
+        imageUrl: await uploadFile(),
+        // imageName: "",
+        // imageData: "",
         materialName: _nameController.text.toLowerCase(),
         typeName: _typeController.text.toLowerCase(),
         unitName: _unitController.text.toLowerCase(),
@@ -215,6 +206,7 @@ class _MaterialInputState extends State<MaterialInput> {
         print('value: ${value}');
         if (value["success"]){
           addProcess(AppMaterial.fromJson(value["data"]));
+          Navigator.pushReplacementNamed(context, 'home_view');
           print('appProcess: ${value["data"]}');
           AppAlerts.toast(message: value["message"]);
           print('appProcess1: ${value["message"]}');
@@ -238,8 +230,9 @@ class _MaterialInputState extends State<MaterialInput> {
       password: "",
       phoneNumber: "",
       departmentName: "",
-      imageName: "",
-      imageData: "",
+      imageUrl: "",
+      // imageName: "",
+      // imageData: "",
       isAdmin: false,
       createdAt: "",
       updatedAt: "",
@@ -258,7 +251,7 @@ class _MaterialInputState extends State<MaterialInput> {
 
     ProcessService.addProcess(processData).then((value) {
       if (value["success"]){
-        //Navigator.pushReplacementNamed(context, 'home_view');
+        // Navigator.pushReplacementNamed(context, 'home_view');
       } else {
         AppAlerts.toast(message: value["message"]);
       }

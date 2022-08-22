@@ -1,8 +1,9 @@
 class AppMaterial {
   int materialId;
   int referenceNumber;
-  String imageName;
-  String imageData;
+  // String imageName;
+  // String imageData;
+  String imageUrl;
   String materialName;
   String typeName;
   String unitName;
@@ -16,8 +17,9 @@ class AppMaterial {
   AppMaterial(
       {required this.materialId,
         required this.referenceNumber,
-        required this.imageName,
-        required this.imageData,
+        required this.imageUrl,
+        // required this.imageName,
+        // required this.imageData,
         required this.materialName,
         required this.typeName,
         required this.unitName,
@@ -31,8 +33,9 @@ class AppMaterial {
   factory AppMaterial.fromJson(Map<String, dynamic> json) => AppMaterial(
     materialId: json["materialId"] as int,
     referenceNumber: json["referenceNumber"] as int,
-    imageName: json["imageName"] as String,
-    imageData: json["imageData"] as String,
+    imageUrl: json["imageUrl"] as String,
+    // imageName: json["imageName"] as String,
+    // imageData: json["imageData"] as String,
     materialName: json["materialName"] as String,
     typeName: json["typeName"] as String,
     unitName: json["unitName"] as String,
@@ -47,8 +50,9 @@ class AppMaterial {
   Map<String, dynamic> toJson() => {
     "materialId": materialId,
     "referenceNumber": referenceNumber,
-    "imageName": imageName,
-    "imageData": imageData,
+    "imageUrl": imageUrl,
+    // "imageName": imageName,
+    // "imageData": imageData,
     "materialName": materialName,
     "typeName": typeName,
     "unitName": unitName,
