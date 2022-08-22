@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import './views/home.dart';
@@ -6,8 +7,9 @@ import 'design/app_theme_data.dart';
 import 'routes/routes.dart';
 import 'storage/storage.dart';
 
-void main() {
-
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   initializeDateFormatting('tr_TR', null).then((_) => runApp(const MyApp()));
 }
 
@@ -38,8 +40,8 @@ class _MyAppState extends State<MyApp> {
           theme: AppThemeData.lightTheme(context),
           themeMode: ThemeMode.light,
           darkTheme: AppThemeData.darkTheme(context),
-          home: snapshot.data == null ? const Login() : const Home(),
-          // initialRoute: snapshot.data == null ? "login_view" : "home_view",
+          //home: snapshot.data == null ? const Login() : const Home(),
+          initialRoute: snapshot.data == null ? "login_view" : "home_view",
           routes: routes,
           //supportedLocales: const [Locale("en", "US"), Locale("tr", "TR")],
 

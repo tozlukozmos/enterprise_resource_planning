@@ -7,8 +7,10 @@ import 'package:enterprise_resource_planning/models/app_process.dart';
 import 'package:enterprise_resource_planning/services/material_service.dart';
 import 'package:enterprise_resource_planning/services/process_service.dart';
 import 'package:enterprise_resource_planning/widgets/app_cards.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:path/path.dart';
 import '../models/user.dart';
 import '../storage/storage.dart';
 import '../widgets/app_alerts.dart';
@@ -22,6 +24,7 @@ class MaterialInput extends StatefulWidget {
 }
 
 class _MaterialInputState extends State<MaterialInput> {
+  final FirebaseStorage storage = FirebaseStorage.instance;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _typeController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
@@ -44,6 +47,26 @@ class _MaterialInputState extends State<MaterialInput> {
       image = img;
     });
   }
+
+  Future uploadFile() async {
+    if (image == null) return;
+    final fileName = basename(image!.path);
+    print('fileName : ${fileName}');
+    final destination = 'files/$fileName';
+
+    try {
+      final ref = FirebaseStorage.instance
+          .ref(destination)
+          .child('file/');
+      await ref.putFile(image!);
+      FirebaseStorage.instance
+          .ref(destination)
+          .child('file/').getDownloadURL().then((url) => print("Here is the URL of Image $url"));
+    } catch (e) {
+      print('Hata');
+    }
+  }
+
 
   int randomQr = 0;
 
@@ -152,7 +175,7 @@ class _MaterialInputState extends State<MaterialInput> {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
-                onPressed: addMaterial,
+                onPressed: uploadFile,
                 child: const Text("Giriş İşlemini Tamamla"),
               ),
             ),
@@ -235,7 +258,7 @@ class _MaterialInputState extends State<MaterialInput> {
 
     ProcessService.addProcess(processData).then((value) {
       if (value["success"]){
-        Navigator.pushReplacementNamed(context, 'home_view');
+        //Navigator.pushReplacementNamed(context, 'home_view');
       } else {
         AppAlerts.toast(message: value["message"]);
       }

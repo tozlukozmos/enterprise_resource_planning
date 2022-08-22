@@ -9,8 +9,8 @@ import '../models/user.dart';
 import '../storage/storage.dart';
 
 class BaseService {
-  // static String baseUrl = 'https://api-first-java-backend-project.herokuapp.com';
-  static String baseUrl = 'http://192.168.2.112:8080';
+  static String baseUrl = 'https://api-first-java-backend-project.herokuapp.com';
+  //static String baseUrl = 'http://192.168.2.112:8080';
   static SecureStorage secureStorage = SecureStorage();
 
   static Future<Map<String, dynamic>> getRequest(String path) async {

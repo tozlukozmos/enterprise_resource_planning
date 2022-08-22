@@ -42,12 +42,17 @@ dependencies:
   iconsax: ^0.0.8
   qr_code_scanner: ^1.0.0
   image_picker: ^0.8.5+3
+  path: ^1.8.0
+  #file_picker: ^5.0.1
   http: ^0.13.5
   intl: ^0.17.0
   fluttertoast: ^8.0.9
   dotted_border: ^2.0.0+2
   path_provider: ^2.0.11
   flutter_launcher_icons: ^0.10.0
+
+  firebase_core: "^1.5.0"
+  firebase_storage: "^10.0.2"
 
 dev_dependencies:
   flutter_test:

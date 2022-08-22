@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "769326461051",
+    "project_id": "image-uploder-37e66",
+    "storage_bucket": "image-uploder-37e66.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:769326461051:android:3850cf0c223e87bb16b2de",
+        "android_client_info": {
+          "package_name": "com.solvio.enterprise_resource_planning"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "769326461051-c4g22rlbkptmp0hqedrc0a0l3g60br2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxVjtcbQomfC9_qW6ueP8fn1iM3l-MNpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "769326461051-c4g22rlbkptmp0hqedrc0a0l3g60br2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
