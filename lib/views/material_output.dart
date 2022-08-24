@@ -30,7 +30,7 @@ class _MaterialOutputState extends State<MaterialOutput> {
   final TextEditingController _explanationController = TextEditingController();
 
   int currentStock = 0;
-
+  bool isLoading = false ;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -174,8 +174,18 @@ class _MaterialOutputState extends State<MaterialOutput> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
-                      onPressed: () {updateMaterial(material);},
-                      child: const Text("Çıkış İşlemini Tamamla"),
+                      onPressed: () {
+
+                        setState(()=> isLoading = true);
+                        updateMaterial(material);},
+                      child: isLoading?Container(
+                        height: 20,
+                        width: 20,
+                        child: const CircularProgressIndicator(
+                          color: AppColors.lightSecondary,
+                          strokeWidth: 3,
+                        ),
+                      ):const Text("Çıkış İşlemini Tamamla"),
                     ),
                   ),
                 ],
@@ -199,21 +209,26 @@ class _MaterialOutputState extends State<MaterialOutput> {
   void updateMaterial(AppMaterial material) {
     if(_amountController.text.isNotEmpty) {
       if(currentStock >= int.parse(_amountController.text)) {
+
         material.amount = currentStock - int.parse(_amountController.text);
         print(material.amount);
         MaterialService.updateMaterial(material, null).then((value) {
           print(value);
           if (value["success"]){
+            setState(()=> isLoading = true);
             addProcess(AppMaterial.fromJson(value["data"]));
             AppAlerts.toast(message: value["message"]);
           } else {
+            setState(()=> isLoading = true);
             AppAlerts.toast(message: value["message"]);
           }
         });
       } else {
+        setState(()=> isLoading = true);
         AppAlerts.toast(message: "Yeterli stok bulunmamaktadır.");
       }
     } else {
+      setState(()=> isLoading = true);
       AppAlerts.toast(message: "Lütfen zorunlu alanları doldurunuz.");
     }
   }

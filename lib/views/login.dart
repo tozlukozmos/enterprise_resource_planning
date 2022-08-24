@@ -23,7 +23,7 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
 
   bool isChecked = false;
-
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -83,8 +83,19 @@ class _LoginState extends State<Login> {
                       const SizedBox(height: 4),
                       Align(
                         alignment: Alignment.centerRight,
-                        child: ElevatedButton(
-                          onPressed: logIn,
+                        child: isLoading ? ElevatedButton(
+                            onPressed: (){}
+                            , child: Container(
+                          height: 20,
+                          width: 20,
+                          child: const CircularProgressIndicator(
+                            color: AppColors.lightSecondary,
+                            strokeWidth: 3,
+                          ),
+                        )) :ElevatedButton(
+                          onPressed: (){
+                            setState(()=>isLoading = true );
+                            logIn();},
                           child: const Text("Giriş Yap"),
                         ),
                       ),
@@ -115,23 +126,30 @@ class _LoginState extends State<Login> {
 
   void logIn() async {
     try {
+
       if (_formKey.currentState!.validate()) {
+
         await UserService.logIn(
           _usernameController.text,
           _passwordController.text,
         ).then((value) => {
           if (value["success"]){
+            setState(()=>isLoading = false ),
             Navigator.pushReplacementNamed(context, 'home_view'),
             AppAlerts.toast(message: value["message"]),
           } else {
+            setState(()=>isLoading = false ),
             AppAlerts.toast(message: value["message"]),
           },
         },
         );
-      }
+      }else
+        setState(()=>isLoading = false );
     } on SocketException catch (e) {
+
       AppAlerts.toast(message: "İnternet bağlantınızı kontrol ediniz.");
     } catch (e) {
+      setState(()=>isLoading = false );
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           padding: const EdgeInsets.all(20),

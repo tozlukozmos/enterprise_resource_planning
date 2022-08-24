@@ -100,7 +100,7 @@ class _HomeState extends State<Home> {
                   tooltip: "Profil Menüsü",
                   padding: const EdgeInsets.all(8),
                   itemBuilder: (context) => [
-                    PopupMenuItem(
+                    /*PopupMenuItem(
                       value: 1,
                       child: Row(
                         children: [
@@ -112,7 +112,7 @@ class _HomeState extends State<Home> {
                           Text("Yardım", style: AppText.contextSemiBold),
                         ],
                       ),
-                    ),
+                    ),*/
                     PopupMenuItem(
                       onTap: logOut,
                       value: 2,

@@ -31,7 +31,7 @@ class _MaterialReportingState extends State<MaterialReporting> {
   final TextEditingController _explanationController = TextEditingController();
 
   int currentStock = 0;
-
+  bool isLoading = false ;
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -182,9 +182,17 @@ class _MaterialReportingState extends State<MaterialReporting> {
                     alignment: Alignment.centerRight,
                     child: ElevatedButton(
                       onPressed: () {
+                        setState(()=> isLoading = true);
                         updateMaterial(material);
                       },
-                      child: const Text("Hata Bildirimini Tamamla"),
+                      child: isLoading? Container(
+                        height: 20,
+                        width: 20,
+                        child: const CircularProgressIndicator(
+                          color: AppColors.lightSecondary,
+                          strokeWidth: 3,
+                        ),
+                      ) :const Text("Hata Bildirimini Tamamla"),
                     ),
                   ),
                 ],
@@ -214,16 +222,20 @@ class _MaterialReportingState extends State<MaterialReporting> {
         MaterialService.updateMaterial(material, null).then((value) {
           print(value);
           if (value["success"]) {
+            setState(()=> isLoading = false);
             addProcess(AppMaterial.fromJson(value["data"]));
             AppAlerts.toast(message: value["message"]);
           } else {
+            setState(()=> isLoading = false);
             AppAlerts.toast(message: value["message"]);
           }
         });
       } else {
+        setState(()=> isLoading = false);
         AppAlerts.toast(message: "Yeterli stok bulunmamaktadır.");
       }
     } else {
+      setState(()=> isLoading = false);
       AppAlerts.toast(message: "Lütfen zorunlu alanları doldurunuz.");
     }
   }

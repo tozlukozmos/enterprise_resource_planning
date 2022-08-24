@@ -9,6 +9,7 @@ import 'package:enterprise_resource_planning/widgets/app_cards.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
+import '../design/app_colors.dart';
 import '../models/user.dart';
 import '../storage/storage.dart';
 import '../widgets/app_alerts.dart';
@@ -39,7 +40,7 @@ class _MaterialInputState extends State<MaterialInput> {
   List<String> colorSuggestions = ["Kırmızı", "Yeşil", "Mor", "Mavi"];
 
   File? image;
-
+  bool isLoading = false ;
   void getSelectedImage(File? img) {
     setState(() {
       image = img;
@@ -151,8 +152,18 @@ class _MaterialInputState extends State<MaterialInput> {
             Align(
               alignment: Alignment.centerRight,
               child: ElevatedButton(
-                onPressed: addMaterial,
-                child: const Text("Giriş İşlemini Tamamla"),
+                onPressed: (){
+
+                  setState(()=>isLoading = true );
+                  addMaterial();},
+                child: isLoading? Container(
+                  height: 20,
+                  width: 20,
+                  child: const CircularProgressIndicator(
+                    color: AppColors.lightSecondary,
+                    strokeWidth: 3,
+                  ),
+                ) :const Text("Giriş İşlemini Tamamla"),
               ),
             ),
           ],
@@ -205,17 +216,20 @@ class _MaterialInputState extends State<MaterialInput> {
       MaterialService.addMaterial(materialData, image).then((value) {
         print('value: ${value}');
         if (value["success"]){
+          setState(()=>isLoading = false );
           addProcess(AppMaterial.fromJson(value["data"]));
           Navigator.pushReplacementNamed(context, 'home_view');
           print('appProcess: ${value["data"]}');
           AppAlerts.toast(message: value["message"]);
           print('appProcess1: ${value["message"]}');
         } else {
+          setState(()=>isLoading = false );
           AppAlerts.toast(message: value["message"]);
           print('appProcess2: ${value["message"]}');
         }
       });
     } else {
+      setState(()=>isLoading = false );
       AppAlerts.toast(message: "Lütfen zorunlu alanları doldurunuz.");
     }
   }
