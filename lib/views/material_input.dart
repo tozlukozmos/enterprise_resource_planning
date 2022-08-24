@@ -60,7 +60,7 @@ class _MaterialInputState extends State<MaterialInput> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Hammadde Girişi"),
+          title: const Text("Hammadde Giriş"),
         ),
         body: ListView(
           padding: const EdgeInsets.all(24),
@@ -291,4 +291,5 @@ class _MaterialInputState extends State<MaterialInput> {
     _explanationController.dispose();
     super.dispose();
   }
+
 }
