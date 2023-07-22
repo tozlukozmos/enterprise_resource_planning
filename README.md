@@ -31,12 +31,8 @@ Ve sonuç olarak işlenen hammaddelerin çıkan ürüne kadarki bütün aşamas�
   </div>
 </div>
 
-
-
-
-
-
-
-
-
+## Sahipler
+- [@furkancvk](https://github.com/furkancvk)
+- [@tozlukozmos](https://github.com/tozlukozmos)
+- [@OFD16](https://github.com/OFD16)
 
