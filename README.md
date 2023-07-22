@@ -13,18 +13,15 @@ Solvio ERP Mobil uygulamasıdır. Bu uygulama, Solvio ERP Desktop'la birlikte ç
 Ve sonuç olarak işlenen hammaddelerin çıkan ürüne kadarki bütün aşamasını takip etmesini QR kodlarla beraber sağlamaktadır.
 
 ## DEMO
-Mobil: 
+<div style="display: flex; justify-content: center; align-items: center;">
+  <a title="SOLVIO ERP Mobile App" href="https://www.youtube.com/watch?v=cUIE73fStfI" target="_blank" style="margin-right: 20px;">
+    <img src="https://github.com/tozlukozmos/enterprise_resource_planning/blob/main/assets/images/logo.png?raw=true" alt="SOLVIO ERP Mobile App" style="max-height: 100px;">
+  </a>
+  <a title="SOLVIO ERP Desktop App" href="https://www.youtube.com/watch?v=PeQidE56mFg" target="_blank">
+    <img src="https://firebasestorage.googleapis.com/v0/b/my-first-project-5d32d.appspot.com/o/1690022865829?alt=media&token=a3503cda-c848-494d-90f8-5e23e3bfea2f" alt="SOLVIO ERP Desktop App" style="max-height: 100px;">
+  </a>
+</div>
 
-<a title="SOLVIO ERP Mobile App" href="https://www.youtube.com/watch?v=cUIE73fStfI" target="_blank">
-  <img
-    src="https://github.com/tozlukozmos/enterprise_resource_planning/blob/main/assets/images/logo.png?raw=true"
-  >
-</a>          Masaüstü: 
-<a title="SOLVIO ERP Desktop App" href="https://www.youtube.com/watch?v=PeQidE56mFg" target="_blank">
-  <img
-    src="https://firebasestorage.googleapis.com/v0/b/my-first-project-5d32d.appspot.com/o/1690022865829?alt=media&token=a3503cda-c848-494d-90f8-5e23e3bfea2f"
-  >
-</a>
 
 
 
