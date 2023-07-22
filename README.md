@@ -19,13 +19,13 @@ Mobil:
   <img
     src="https://github.com/tozlukozmos/enterprise_resource_planning/blob/main/assets/images/logo.png?raw=true"
   >
-</a>          Masaüstü: 
-
-<a title="SOLVIO ERP Desktop App" href="https://www.youtube.com/watch?v=PeQidE56mFg" target="_blank">
+</a>          Masaüstü: <a title="SOLVIO ERP Desktop App" href="https://www.youtube.com/watch?v=PeQidE56mFg" target="_blank">
   <img
     src="https://firebasestorage.googleapis.com/v0/b/my-first-project-5d32d.appspot.com/o/1690022865829?alt=media&token=a3503cda-c848-494d-90f8-5e23e3bfea2f"
   >
 </a>
+
+
 
 
 
