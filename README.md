@@ -1,16 +1,22 @@
-# enterprise_resource_planning
+# SOLVIO ERP Mobil Uygulaması
 
-Solvio Software Enterprise Resource Planning Program
+Solvio ERP Mobil uygulamasıdır. Bu uygulama, Solvio ERP Desktop'la birlikte çalışmaktadır.
+Özellikler:
 
-## Getting Started
+- Görev dağıtım sistemi içermektedir: Bu özellik sayesinde işçiler arasında görevler etkin bir şekilde dağıtılabilir ve takip edilebilir.
+- İşçilerin ürün takibini yapmasını sağlar: Uygulama, işçilere ürünlerin durumunu takip etme imkanı sunar.
+- İş yönetimini kolaylaştırır: Solvio ERP Mobil, iş yönetimini daha verimli hale getirir ve süreçleri daha iyi organize edebilir.
+- Görev türlerine göre iş tanımını değiştirir: Farklı görev türleri için uygulanan işlerin tanımları da bu uygulama sayesinde kolayca düzenlenebilir.
+- Depo takibi imkanı sunar: Uygulama, depo takibini sağlayarak envanter yönetimini daha etkili hale getirir.
+- Analiz: Yapılan/üretilen maddenin üretim maaliyeti/zaman/paketleme/sipariş analizini çıkarır.
 
-This project is a starting point for a Flutter application.
+Ve sonuç olarak işlenen hammaddelerin çıkan ürüne kadarki bütün aşamasını takip etmesini QR kodlarla beraber sağlamaktadır.
 
-A few resources to get you started if this is your first Flutter project:
+## DEMO
+<a title="SOLVIO ERP Mobile App" href="https://www.youtube.com/watch?v=cUIE73fStfI">
+  <img
+    src="https://github.com/tozlukozmos/enterprise_resource_planning/blob/main/assets/images/logo.png?raw=true"
+  >
+</a>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
